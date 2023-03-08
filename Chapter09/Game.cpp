@@ -14,7 +14,8 @@
 #include "SpriteComponent.h"
 #include "MeshComponent.h"
 #include "FPSActor.h"
-#include "PlaneActor.h"
+#include "WallActor.h"	// JCW
+#include "FloorActor.h"	//JCW
 #include "AudioComponent.h"
 #include "FollowActor.h"
 #include "OrbitActor.h"
@@ -292,12 +293,13 @@ void Game::LoadData()
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			a = new PlaneActor(this);
+			a = new FloorActor(this);
 			a->SetPosition(Vector3(start + i * size, start + j * size, -100.0f));
 		}
 	}
 
 	// Left/right walls
+	/*
 	q = Quaternion(Vector3::UnitX, Math::PiOver2);
 	for (int i = 0; i < 10; i++)
 	{
@@ -322,6 +324,7 @@ void Game::LoadData()
 		a->SetPosition(Vector3(-start + size, start + i * size, 0.0f));
 		a->SetRotation(q);
 	}
+	*/
 
 	// Setup lights
 	mRenderer->SetAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
