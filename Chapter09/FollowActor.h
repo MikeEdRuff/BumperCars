@@ -21,4 +21,6 @@ private:
 	class MoveComponent* mMoveComp;
 	class FollowCamera* mCameraComp;
 	class MeshComponent* mMeshComp;
+	const float mAcceleration = 20.0f;
+	float mForwardSpeed;
 };

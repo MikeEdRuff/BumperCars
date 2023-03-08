@@ -29,25 +29,34 @@ void FollowActor::ActorInput(const uint8_t* keys)
 {
 	float forwardSpeed = 0.0f;
 	float angularSpeed = 0.0f;
+
+	float maxSpeed = 1600.0f;
+
 	// wasd movement
 	if (keys[SDL_SCANCODE_W])
 	{
-		forwardSpeed += 400.0f;
+		if (mForwardSpeed < maxSpeed)
+			mForwardSpeed += mAcceleration;
 	}
 	if (keys[SDL_SCANCODE_S])
 	{
-		forwardSpeed -= 400.0f;
+		if (mForwardSpeed > -maxSpeed/2)
+			mForwardSpeed -= mAcceleration;
 	}
 	if (keys[SDL_SCANCODE_A])
 	{
 		angularSpeed -= Math::Pi;
+		if (keys[SDL_SCANCODE_LSHIFT])
+			angularSpeed *= 1.5;
 	}
 	if (keys[SDL_SCANCODE_D])
 	{
 		angularSpeed += Math::Pi;
-	}
+		if (keys[SDL_SCANCODE_LSHIFT])
+			angularSpeed *= 1.5;
+	} 
 
-	mMoveComp->SetForwardSpeed(forwardSpeed);
+	mMoveComp->SetForwardSpeed(mForwardSpeed);
 	mMoveComp->SetAngularSpeed(angularSpeed);
 
 	// Adjust horizontal distance of camera based on speed
