@@ -56,6 +56,13 @@ void FollowActor::ActorInput(const uint8_t* keys)
 			angularSpeed *= 1.5;
 	} 
 
+	// JCW - Gradually slows down if nothing is being done
+	else
+	{
+		if (mForwardSpeed > 0)
+			mForwardSpeed -= mAcceleration/2;
+	}
+
 	mMoveComp->SetForwardSpeed(mForwardSpeed);
 	mMoveComp->SetAngularSpeed(angularSpeed);
 
