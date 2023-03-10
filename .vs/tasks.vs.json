@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-playerCar",
+      "appliesTo": "Chapter09/Assets/playerCar.png",
+      "type": "launch"
+    }
+  ]
+}
