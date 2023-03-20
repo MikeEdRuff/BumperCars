@@ -133,12 +133,6 @@ void Game::HandleKeyPress(int key)
 		mAudioSystem->SetBusVolume("bus:/", volume);
 		break;
 	}
-	case '1':
-	case '2':
-	case '3':
-	case '4':
-		ChangeCamera(key);
-		break;
 	case SDL_BUTTON_LEFT:
 	{
 		// Get start point (in center of screen on near plane)
@@ -312,7 +306,17 @@ void Game::LoadData()
 	mOrbitActor = new OrbitActor(this);
 	mSplineActor = new SplineActor(this);
 
-	ChangeCamera('1');
+	// MER Set Camera 
+	mFollowActor->SetState(Actor::EPaused);
+	mFollowActor->SetVisible(false);
+	mOrbitActor->SetState(Actor::EPaused);
+	mOrbitActor->SetVisible(false);
+	mSplineActor->SetState(Actor::EPaused);
+
+	mFollowActor->SetState(Actor::EActive);
+	mFollowActor->SetVisible(true);
+
+
 
 	// Spheres for demonstrating unprojection
 	mStartSphere = new Actor(this);
@@ -388,41 +392,5 @@ void Game::RemoveActor(Actor* actor)
 		// Swap to end of vector and pop off (avoid erase copies)
 		std::iter_swap(iter, mActors.end() - 1);
 		mActors.pop_back();
-	}
-}
-
-void Game::ChangeCamera(int mode)
-{
-	// Disable everything
-	mFPSActor->SetState(Actor::EPaused);
-	mFPSActor->SetVisible(false);
-	mCrosshair->SetVisible(false);
-	mFollowActor->SetState(Actor::EPaused);
-	mFollowActor->SetVisible(false);
-	mOrbitActor->SetState(Actor::EPaused);
-	mOrbitActor->SetVisible(false);
-	mSplineActor->SetState(Actor::EPaused);
-
-	// Enable the camera specified by the mode
-	switch (mode)
-	{
-	case '1':
-	default:
-		mFPSActor->SetState(Actor::EActive);
-		mFPSActor->SetVisible(true);
-		mCrosshair->SetVisible(true);
-		break;
-	case '2':
-		mFollowActor->SetState(Actor::EActive);
-		mFollowActor->SetVisible(true);
-		break;
-	case '3':
-		mOrbitActor->SetState(Actor::EActive);
-		mOrbitActor->SetVisible(true);
-		break;
-	case '4':
-		mSplineActor->SetState(Actor::EActive);
-		mSplineActor->RestartSpline();
-		break;
 	}
 }

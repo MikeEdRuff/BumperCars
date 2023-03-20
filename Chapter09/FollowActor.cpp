@@ -17,7 +17,7 @@ FollowActor::FollowActor(Game* game)
 	:Actor(game)
 {
 	mMeshComp = new MeshComponent(this);
-	mMeshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/RacingCar.gpmesh"));
+	mMeshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/playerCar.gpmesh"));
 	SetPosition(Vector3(0.0f, 0.0f, -100.0f));
 
 	mMoveComp = new MoveComponent(this);
