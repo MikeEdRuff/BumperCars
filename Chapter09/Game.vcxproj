@@ -17,6 +17,7 @@
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="CircleComponent.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="FloorActor.cpp" />
     <ClCompile Include="FollowActor.cpp" />
     <ClCompile Include="FollowCamera.cpp" />
     <ClCompile Include="FPSActor.cpp" />
@@ -46,6 +47,7 @@
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="CircleComponent.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="FloorActor.h" />
     <ClInclude Include="FollowActor.h" />
     <ClInclude Include="FollowCamera.h" />
     <ClInclude Include="FPSActor.h" />

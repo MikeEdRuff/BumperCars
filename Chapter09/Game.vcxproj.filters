@@ -91,6 +91,9 @@
     <ClCompile Include="SplineCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FloorActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h">
@@ -169,6 +172,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="SplineCamera.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorActor.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

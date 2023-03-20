@@ -205,62 +205,7 @@ void Game::UpdateGame()
 
 	// Update audio system
 	mAudioSystem->Update(deltaTime);
-	//Caleb Bellisle: lets make the lights do something cool
 	
-	DirectionalLight& dir = mRenderer->GetDirectionalLight();
-	//dir.mDirection = Vector3(0.0f, -0.707f, -0.707f);
-
-	//setting variables
-	static double redNum = 1;
-	static double greenNum = 1;
-	static double blueNum = 1;
-
-
-	//dir.mDirection = Vector3(0, 1 , 0);
-	dir.mDiffuseColor = Vector3(redNum, greenNum, blueNum);
-	//dir.mSpecColor = Vector3(0.8f, 0.8f, 0.8f);
-	//booleans to keep track of stuff for colors
-	static bool green = false;
-	static bool red = true;
-	static bool blue = false;
-	//basically just checking each color, want to make a rainbowish effect
-	if (redNum >= 10)
-	{
-		red = false;
-		green = true;
-	}
-	else if (redNum < 1)
-		red = true;
-	
-	if (greenNum >= 10)
-	{
-		green = false;
-		blue = true;
-	}
-	else if(greenNum <= 1)
-		green = true;
-
-	if (blueNum >= 10)
-	{
-		blue = false;
-		red = true;
-	}
-	else if (blueNum <= 1)
-		blue = true;
-
-	//CB: increment colors
-	if (red)
-		redNum+= 0.25;
-	else
-		redNum-= 0.25;
-	if (green)
-		greenNum+= 0.25;
-	else
-		greenNum-= 0.25;
-	if (blue)
-		blueNum+= 0.25;
-	else
-		blueNum-= 0.25;
 }
 
 void Game::GenerateOutput()
@@ -288,10 +233,13 @@ void Game::LoadData()
 
 	// Setup floor
 	const float start = -1250.0f;
-	const float size = 250.0f;
-	for (int i = 0; i < 10; i++)
+	const float size = 500.0f;
+	const int ySize = 25;
+	const int xSize = 25;
+
+	for (int i = 0; i < ySize; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < xSize; j++)
 		{
 			a = new FloorActor(this);
 			a->SetPosition(Vector3(start + i * size, start + j * size, -100.0f));
