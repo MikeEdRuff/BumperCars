@@ -30,13 +30,23 @@ void FollowActor::ActorInput(const uint8_t* keys)
 	float forwardSpeed = 0.0f;
 	float angularSpeed = 0.0f;
 
-	float maxSpeed = 1600.0f;
+	const float maxSpeed = 1600.0f;
+	const float maxBoost = 2400.0f;
 
 	// wasd movement
 	if (keys[SDL_SCANCODE_W])
 	{
 		if (mForwardSpeed < maxSpeed)
 			mForwardSpeed += mAcceleration;
+
+		//BOOOOOOST
+		if (keys[SDL_SCANCODE_SPACE] && mForwardSpeed < maxBoost 
+			&& mBoostCooldown <= 0.0f)
+		{
+			mForwardSpeed += mAcceleration*2;
+
+			mBoostCooldown = 2.0f; // JCW - Time until next boost (2 seconds)
+		}
 	}
 	if (keys[SDL_SCANCODE_S])
 	{
@@ -46,12 +56,16 @@ void FollowActor::ActorInput(const uint8_t* keys)
 	if (keys[SDL_SCANCODE_A])
 	{
 		angularSpeed -= Math::Pi;
+
+		// JCW - Drift Mechanics
 		if (keys[SDL_SCANCODE_LSHIFT])
 			angularSpeed *= 1.5;
 	}
 	if (keys[SDL_SCANCODE_D])
 	{
 		angularSpeed += Math::Pi;
+
+		// JCW - Drift Mechanics
 		if (keys[SDL_SCANCODE_LSHIFT])
 			angularSpeed *= 1.5;
 	} 
@@ -75,6 +89,11 @@ void FollowActor::ActorInput(const uint8_t* keys)
 	{
 		mCameraComp->SetHorzDist(350.0f);
 	}
+}
+
+void FollowActor::UpdateActor(float deltaTime)
+{
+	mBoostCooldown -= deltaTime;
 }
 
 void FollowActor::SetVisible(bool visible)

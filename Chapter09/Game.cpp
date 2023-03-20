@@ -299,15 +299,14 @@ void Game::LoadData()
 	}
 
 	// Left/right walls
-	/*
 	q = Quaternion(Vector3::UnitX, Math::PiOver2);
 	for (int i = 0; i < 10; i++)
 	{
-		a = new PlaneActor(this);
+		a = new WallActor(this); //JCW
 		a->SetPosition(Vector3(start + i * size, start - size, 0.0f));
 		a->SetRotation(q);
 		
-		a = new PlaneActor(this);
+		a = new WallActor(this); //JCW
 		a->SetPosition(Vector3(start + i * size, -start + size, 0.0f));
 		a->SetRotation(q);
 	}
@@ -316,15 +315,14 @@ void Game::LoadData()
 	// Forward/back walls
 	for (int i = 0; i < 10; i++)
 	{
-		a = new PlaneActor(this);
+		a = new WallActor(this); //JCW
 		a->SetPosition(Vector3(start - size, start + i * size, 0.0f));
 		a->SetRotation(q);
 
-		a = new PlaneActor(this);
+		a = new WallActor(this); //JCW
 		a->SetPosition(Vector3(-start + size, start + i * size, 0.0f));
 		a->SetRotation(q);
 	}
-	*/
 
 	// Setup lights
 	mRenderer->SetAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
@@ -364,7 +362,7 @@ void Game::LoadData()
 	mOrbitActor = new OrbitActor(this);
 	mSplineActor = new SplineActor(this);
 
-	ChangeCamera('1');
+	ChangeCamera('2'); // Setting default actor and camera to the car -- JCW
 
 	// Spheres for demonstrating unprojection
 	mStartSphere = new Actor(this);

@@ -16,6 +16,8 @@ public:
 
 	void ActorInput(const uint8_t* keys) override;
 
+	void UpdateActor(float deltaTime);
+
 	void SetVisible(bool visible);
 private:
 	class MoveComponent* mMoveComp;
@@ -23,4 +25,6 @@ private:
 	class MeshComponent* mMeshComp;
 	const float mAcceleration = 20.0f;
 	float mForwardSpeed;
+	float mBoostCooldown; // Cooldown to next boost
+	float mBoostDuration; // Duration of boost
 };
