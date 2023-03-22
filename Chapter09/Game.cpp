@@ -228,8 +228,8 @@ void Game::LoadData()
 	mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
 
 	// Setup floor
-	const float start = -1250.0f;
-	const float size = 500.0f;
+	float start = -1250.0f;
+	float size = 500.0f;
 	const int ySize = 25;
 	const int xSize = 25;
 
@@ -242,29 +242,31 @@ void Game::LoadData()
 		}
 	}
 
+	int roomSize = 5000;
+
 	// Left/right walls
 	q = Quaternion(Vector3::UnitX, Math::PiOver2);
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 25; i++)
 	{
 		a = new WallActor(this); //JCW
 		a->SetPosition(Vector3(start + i * size, start - size, 0.0f));
 		a->SetRotation(q);
 		
 		a = new WallActor(this); //JCW
-		a->SetPosition(Vector3(start + i * size, -start + size, 0.0f));
+		a->SetPosition(Vector3(start + i * size, -start + size + roomSize, 0.0f));
 		a->SetRotation(q);
 	}
 
 	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::PiOver2));
 	// Forward/back walls
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 25; i++)
 	{
 		a = new WallActor(this); //JCW
 		a->SetPosition(Vector3(start - size, start + i * size, 0.0f));
 		a->SetRotation(q);
 
 		a = new WallActor(this); //JCW
-		a->SetPosition(Vector3(-start + size, start + i * size, 0.0f));
+		a->SetPosition(Vector3(-start + size + roomSize, start + i * size, 0.0f));
 		a->SetRotation(q);
 	}
 
@@ -277,20 +279,17 @@ void Game::LoadData()
 
 	// UI elements
 	a = new Actor(this);
-	a->SetPosition(Vector3(-350.0f, -350.0f, 0.0f));
+	a->SetPosition(Vector3(-740.0f, -500.0f, 0.0f));
+	a->SetScale(1.5f);
 	SpriteComponent* sc = new SpriteComponent(a);
 	sc->SetTexture(mRenderer->GetTexture("Assets/HealthBar.png"));
 
-	a = new Actor(this);
+	/*a = new Actor(this);
 	a->SetPosition(Vector3(-390.0f, 275.0f, 0.0f));
 	a->SetScale(0.75f);
 	sc = new SpriteComponent(a);
 	sc->SetTexture(mRenderer->GetTexture("Assets/Radar.png"));
-
-	a = new Actor(this);
-	a->SetScale(2.0f);
-	mCrosshair = new SpriteComponent(a);
-	mCrosshair->SetTexture(mRenderer->GetTexture("Assets/Crosshair.png"));
+	*/
 
 	// Start music
 	mMusicEvent = mAudioSystem->PlayEvent("event:/Music");
