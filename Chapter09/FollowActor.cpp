@@ -40,12 +40,20 @@ void FollowActor::ActorInput(const uint8_t* keys)
 			mForwardSpeed += mAcceleration;
 
 		//BOOOOOOST
-		if (keys[SDL_SCANCODE_SPACE] && mForwardSpeed < maxBoost 
-			&& mBoostCooldown <= 0.0f)
+		if (keys[SDL_SCANCODE_SPACE] && mForwardSpeed < maxBoost && mBoostCooldown <= 0.0f)
 		{
-			mForwardSpeed += mAcceleration*2;
+			// JCW - If there is boost to use
+			if (mBoostDuration > 0.0f)
+			{
+				mForwardSpeed += mAcceleration * 2;
+				mBoostDuration -= 0.1f;
+			}
 
-			mBoostCooldown = 2.0f; // JCW - Time until next boost (2 seconds)
+			// JCW - Once the boost is used up
+			else if (mBoostDuration <= 0.0f)
+			{
+				mBoostCooldown = 2.0f; // JCW - Time until next boost (2 seconds)
+			}
 		}
 	}
 	if (keys[SDL_SCANCODE_S])
@@ -93,6 +101,8 @@ void FollowActor::ActorInput(const uint8_t* keys)
 
 void FollowActor::UpdateActor(float deltaTime)
 {
+	if (mBoostDuration <= 3.0f) // Only 3 seconds of boost allowed
+		mBoostDuration += deltaTime;
 	mBoostCooldown -= deltaTime;
 }
 
