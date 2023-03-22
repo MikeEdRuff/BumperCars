@@ -50,7 +50,6 @@ private:
 
 	// Game-specific code
 	class AiCar* mAiCar;
-	class FPSActor* mFPSActor;
 	class FollowActor* mFollowActor;
 	class OrbitActor* mOrbitActor;
 	class SplineActor* mSplineActor;
@@ -59,5 +58,4 @@ private:
 	class SpriteComponent* mCrosshair;
 	SoundEvent mMusicEvent;
 	SoundEvent mReverbSnap;
-	void ChangeCamera(int mode);
 };
