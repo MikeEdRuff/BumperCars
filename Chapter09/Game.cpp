@@ -13,9 +13,9 @@
 #include "Actor.h"
 #include "SpriteComponent.h"
 #include "MeshComponent.h"
-#include "FPSActor.h"
 #include "WallActor.h"	// JCW
 #include "FloorActor.h"	//JCW
+#include "AiCar.h" //MER
 #include "AudioComponent.h"
 #include "FollowActor.h"
 #include "OrbitActor.h"
@@ -153,6 +153,8 @@ void Game::HandleKeyPress(int key)
 
 void Game::UpdateGame()
 {
+	// MER Make Car Move
+	mAiCar->AiCarMovementPatrol();
 	// Compute delta time
 	// Wait until 16ms has elapsed since last frame
 	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16))
@@ -301,10 +303,10 @@ void Game::LoadData()
 	SDL_GetRelativeMouseState(nullptr, nullptr);
 
 	// Different camera actors
-	mFPSActor = new FPSActor(this);
 	mFollowActor = new FollowActor(this);
 	mOrbitActor = new OrbitActor(this);
 	mSplineActor = new SplineActor(this);
+	mAiCar = new AiCar(this);
 
 	// MER Set Camera 
 	mFollowActor->SetState(Actor::EPaused);

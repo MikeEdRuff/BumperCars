@@ -73,9 +73,6 @@
     <ClCompile Include="FollowCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FPSActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FPSCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -92,6 +89,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FloorActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AiCar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -156,9 +156,6 @@
     <ClInclude Include="FollowCamera.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="FPSActor.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="FPSCamera.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -175,6 +172,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="FloorActor.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AiCar.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
