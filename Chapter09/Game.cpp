@@ -13,9 +13,9 @@
 #include "Actor.h"
 #include "SpriteComponent.h"
 #include "MeshComponent.h"
-#include "FPSActor.h"
 #include "WallActor.h"	// JCW
 #include "FloorActor.h"	//JCW
+#include "AiCar.h" //MER
 #include "AudioComponent.h"
 #include "FollowActor.h"
 #include "OrbitActor.h"
@@ -133,12 +133,6 @@ void Game::HandleKeyPress(int key)
 		mAudioSystem->SetBusVolume("bus:/", volume);
 		break;
 	}
-	case '1':
-	case '2':
-	case '3':
-	case '4':
-		ChangeCamera(key);
-		break;
 	case SDL_BUTTON_LEFT:
 	{
 		// Get start point (in center of screen on near plane)
@@ -159,6 +153,8 @@ void Game::HandleKeyPress(int key)
 
 void Game::UpdateGame()
 {
+	// MER Make Car Move
+	mAiCar->AiCarMovementPatrol();
 	// Compute delta time
 	// Wait until 16ms has elapsed since last frame
 	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16))
@@ -205,62 +201,7 @@ void Game::UpdateGame()
 
 	// Update audio system
 	mAudioSystem->Update(deltaTime);
-	//Caleb Bellisle: lets make the lights do something cool
 	
-	DirectionalLight& dir = mRenderer->GetDirectionalLight();
-	//dir.mDirection = Vector3(0.0f, -0.707f, -0.707f);
-
-	//setting variables
-	static double redNum = 1;
-	static double greenNum = 1;
-	static double blueNum = 1;
-
-
-	//dir.mDirection = Vector3(0, 1 , 0);
-	dir.mDiffuseColor = Vector3(redNum, greenNum, blueNum);
-	//dir.mSpecColor = Vector3(0.8f, 0.8f, 0.8f);
-	//booleans to keep track of stuff for colors
-	static bool green = false;
-	static bool red = true;
-	static bool blue = false;
-	//basically just checking each color, want to make a rainbowish effect
-	if (redNum >= 10)
-	{
-		red = false;
-		green = true;
-	}
-	else if (redNum < 1)
-		red = true;
-	
-	if (greenNum >= 10)
-	{
-		green = false;
-		blue = true;
-	}
-	else if(greenNum <= 1)
-		green = true;
-
-	if (blueNum >= 10)
-	{
-		blue = false;
-		red = true;
-	}
-	else if (blueNum <= 1)
-		blue = true;
-
-	//CB: increment colors
-	if (red)
-		redNum+= 0.25;
-	else
-		redNum-= 0.25;
-	if (green)
-		greenNum+= 0.25;
-	else
-		greenNum-= 0.25;
-	if (blue)
-		blueNum+= 0.25;
-	else
-		blueNum-= 0.25;
 }
 
 void Game::GenerateOutput()
@@ -288,10 +229,13 @@ void Game::LoadData()
 
 	// Setup floor
 	const float start = -1250.0f;
-	const float size = 250.0f;
-	for (int i = 0; i < 10; i++)
+	const float size = 500.0f;
+	const int ySize = 25;
+	const int xSize = 25;
+
+	for (int i = 0; i < ySize; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < xSize; j++)
 		{
 			a = new FloorActor(this);
 			a->SetPosition(Vector3(start + i * size, start + j * size, -100.0f));
@@ -357,12 +301,22 @@ void Game::LoadData()
 	SDL_GetRelativeMouseState(nullptr, nullptr);
 
 	// Different camera actors
-	mFPSActor = new FPSActor(this);
 	mFollowActor = new FollowActor(this);
 	mOrbitActor = new OrbitActor(this);
 	mSplineActor = new SplineActor(this);
+	mAiCar = new AiCar(this);
 
-	ChangeCamera('2'); // Setting default actor and camera to the car -- JCW
+	// MER Set Camera 
+	mFollowActor->SetState(Actor::EPaused);
+	mFollowActor->SetVisible(false);
+	mOrbitActor->SetState(Actor::EPaused);
+	mOrbitActor->SetVisible(false);
+	mSplineActor->SetState(Actor::EPaused);
+
+	mFollowActor->SetState(Actor::EActive);
+	mFollowActor->SetVisible(true);
+
+
 
 	// Spheres for demonstrating unprojection
 	mStartSphere = new Actor(this);
@@ -438,41 +392,5 @@ void Game::RemoveActor(Actor* actor)
 		// Swap to end of vector and pop off (avoid erase copies)
 		std::iter_swap(iter, mActors.end() - 1);
 		mActors.pop_back();
-	}
-}
-
-void Game::ChangeCamera(int mode)
-{
-	// Disable everything
-	mFPSActor->SetState(Actor::EPaused);
-	mFPSActor->SetVisible(false);
-	mCrosshair->SetVisible(false);
-	mFollowActor->SetState(Actor::EPaused);
-	mFollowActor->SetVisible(false);
-	mOrbitActor->SetState(Actor::EPaused);
-	mOrbitActor->SetVisible(false);
-	mSplineActor->SetState(Actor::EPaused);
-
-	// Enable the camera specified by the mode
-	switch (mode)
-	{
-	case '1':
-	default:
-		mFPSActor->SetState(Actor::EActive);
-		mFPSActor->SetVisible(true);
-		mCrosshair->SetVisible(true);
-		break;
-	case '2':
-		mFollowActor->SetState(Actor::EActive);
-		mFollowActor->SetVisible(true);
-		break;
-	case '3':
-		mOrbitActor->SetState(Actor::EActive);
-		mOrbitActor->SetVisible(true);
-		break;
-	case '4':
-		mSplineActor->SetState(Actor::EActive);
-		mSplineActor->RestartSpline();
-		break;
 	}
 }

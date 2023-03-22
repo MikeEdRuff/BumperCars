@@ -12,14 +12,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="AiCar.cpp" />
     <ClCompile Include="AudioComponent.cpp" />
     <ClCompile Include="AudioSystem.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="CircleComponent.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="FloorActor.cpp" />
     <ClCompile Include="FollowActor.cpp" />
     <ClCompile Include="FollowCamera.cpp" />
-    <ClCompile Include="FPSActor.cpp" />
     <ClCompile Include="FPSCamera.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -41,14 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="AiCar.h" />
     <ClInclude Include="AudioComponent.h" />
     <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="CircleComponent.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="FloorActor.h" />
     <ClInclude Include="FollowActor.h" />
     <ClInclude Include="FollowCamera.h" />
-    <ClInclude Include="FPSActor.h" />
     <ClInclude Include="FPSCamera.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Math.h" />

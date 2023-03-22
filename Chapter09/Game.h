@@ -49,6 +49,7 @@ private:
 	bool mUpdatingActors;
 
 	// Game-specific code
+	class AiCar* mAiCar;
 	class FPSActor* mFPSActor;
 	class FollowActor* mFollowActor;
 	class OrbitActor* mOrbitActor;
