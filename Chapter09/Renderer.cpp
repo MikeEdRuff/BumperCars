@@ -49,8 +49,12 @@ bool Renderer::Initialize(float screenWidth, float screenHeight)
 	// Force OpenGL to use hardware acceleration
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
-	mWindow = SDL_CreateWindow("Game Programming in C++ (Chapter 9)", 100, 100,
+	mWindow = SDL_CreateWindow("XTREME BUMPER CARS", 100, 100,
 		static_cast<int>(mScreenWidth), static_cast<int>(mScreenHeight), SDL_WINDOW_OPENGL);
+
+	// MER Make fullscreen
+	SDL_SetWindowFullscreen(mWindow, SDL_WINDOW_FULLSCREEN_DESKTOP);
+
 	if (!mWindow)
 	{
 		SDL_Log("Failed to create window: %s", SDL_GetError());
