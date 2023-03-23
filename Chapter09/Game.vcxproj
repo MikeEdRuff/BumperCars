@@ -33,6 +33,7 @@
     <ClCompile Include="PlaneActor.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="SoundEvent.cpp" />
     <ClCompile Include="SplineActor.cpp" />
     <ClCompile Include="SplineCamera.cpp" />
@@ -63,6 +64,7 @@
     <ClInclude Include="PlaneActor.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="skybox.h" />
     <ClInclude Include="SoundEvent.h" />
     <ClInclude Include="SplineActor.h" />
     <ClInclude Include="SplineCamera.h" />

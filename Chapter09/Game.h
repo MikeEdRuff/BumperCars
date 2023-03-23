@@ -49,6 +49,7 @@ private:
 	bool mUpdatingActors;
 
 	// Game-specific code
+	class SkyBox* mySkyBox;
 	class AiCar* mAiCar;
 	class FollowActor* mFollowActor;
 	class OrbitActor* mOrbitActor;

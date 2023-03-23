@@ -97,6 +97,9 @@
     <ClCompile Include="WallActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h">
@@ -181,6 +184,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="WallActor.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="skybox.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

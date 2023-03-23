@@ -16,6 +16,7 @@
 #include "WallActor.h"	// JCW
 #include "FloorActor.h"	//JCW
 #include "AiCar.h" //MER
+#include "SkyBox.h"
 #include "AudioComponent.h"
 #include "FollowActor.h"
 #include "OrbitActor.h"
@@ -201,6 +202,9 @@ void Game::UpdateGame()
 
 	// Update audio system
 	mAudioSystem->Update(deltaTime);
+
+	// Update Skybox
+	mySkyBox->SetPosition(mFollowActor->GetPosition());
 	
 }
 
@@ -242,7 +246,7 @@ void Game::LoadData()
 		}
 	}
 
-	int roomSize = 5000;
+	int roomSize = 3000;
 
 	// Left/right walls
 	q = Quaternion(Vector3::UnitX, Math::PiOver2);
@@ -303,7 +307,12 @@ void Game::LoadData()
 	mFollowActor = new FollowActor(this);
 	mOrbitActor = new OrbitActor(this);
 	mSplineActor = new SplineActor(this);
+
+	// create aicar MER
 	mAiCar = new AiCar(this);
+
+	// create skybox
+	mySkyBox = new SkyBox(this);
 
 	// MER Set Camera 
 	mFollowActor->SetState(Actor::EPaused);
