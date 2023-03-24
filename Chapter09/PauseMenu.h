@@ -1,3 +1,4 @@
+#pragma once
 // ----------------------------------------------------------------
 // From Game Programming in C++ by Sanjay Madhav
 // Copyright (C) 2017 Sanjay Madhav. All rights reserved.
@@ -6,24 +7,14 @@
 // See LICENSE in root directory for full details.
 // ----------------------------------------------------------------
 
-#include <string>
+#pragma once
+#include "UIScreen.h"
 
-class Texture
+class PauseMenu : public UIScreen
 {
 public:
-	Texture();
-	~Texture();
+	PauseMenu(class Game* game);
+	~PauseMenu();
 
-	bool Load(const std::string& fileName);
-	void Unload();
-	void CreateFromSurface(struct SDL_Surface* surface);
-
-	void SetActive();
-
-	int GetWidth() const { return mWidth; }
-	int GetHeight() const { return mHeight; }
-private:
-	unsigned int mTextureID;
-	int mWidth;
-	int mHeight;
+	void HandleKeyPress(int key) override;
 };

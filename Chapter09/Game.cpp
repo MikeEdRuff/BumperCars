@@ -20,11 +20,19 @@
 #include "FollowActor.h"
 #include "OrbitActor.h"
 #include "SplineActor.h"
-
+#include "UIScreen.h" //CB
+#include "Font.h"//CB
+#include "PauseMenu.h"//CB
+#include "StartMenu.h"//CB
+#include <SDL/SDL.h>
+#include <SDL/SDL_ttf.h>
+#include <fstream>
+#include <sstream>
+#include <rapidjson/document.h>
 Game::Game()
 :mRenderer(nullptr)
 ,mAudioSystem(nullptr)
-,mIsRunning(true)
+,mGameState(EStart)
 ,mUpdatingActors(false)
 {
 	
@@ -59,6 +67,12 @@ bool Game::Initialize()
 		return false;
 	}
 
+	if (TTF_Init() != 0)
+	{
+		SDL_Log("Failed to initialize SDL_TTF");
+		return false;
+	}
+
 	LoadData();
 
 	mTicksCount = SDL_GetTicks();
@@ -68,8 +82,14 @@ bool Game::Initialize()
 
 void Game::RunLoop()
 {
-	while (mIsRunning)
+	//new PauseMenu(this);
+	//StartMenu* sm = new StartMenu(this); 
+	//delete sm;
+	if (mGameState == EStart)
+		new StartMenu(this);
+	while (mGameState != EQuit)
 	{
+
 		ProcessInput();
 		UpdateGame();
 		GenerateOutput();
@@ -84,17 +104,33 @@ void Game::ProcessInput()
 		switch (event.type)
 		{
 			case SDL_QUIT:
-				mIsRunning = false;
+				mGameState = EQuit;
 				break;
 			// This fires when a key's initially pressed
 			case SDL_KEYDOWN:
 				if (!event.key.repeat)
 				{
-					HandleKeyPress(event.key.keysym.sym);
+					if (mGameState == EGameplay)
+					{
+						HandleKeyPress(event.key.keysym.sym);
+					}
+					else if (!mUIStack.empty())
+					{
+						mUIStack.back()->
+							HandleKeyPress(event.key.keysym.sym);
+					}
 				}
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				HandleKeyPress(event.button.button);
+				if (mGameState == EGameplay)
+				{
+					HandleKeyPress(event.button.button);
+				}
+				else if (!mUIStack.empty())
+				{
+					mUIStack.back()->
+						HandleKeyPress(event.button.button);
+				}
 				break;
 			default:
 				break;
@@ -102,9 +138,19 @@ void Game::ProcessInput()
 	}
 	
 	const Uint8* state = SDL_GetKeyboardState(NULL);
-	if (state[SDL_SCANCODE_ESCAPE])
+	if (mGameState == EGameplay)
 	{
-		mIsRunning = false;
+		for (auto actor : mActors)
+		{
+			if (actor->GetState() == Actor::EActive)
+			{
+				actor->ProcessInput(state);
+			}
+		}
+	}
+	else if (!mUIStack.empty())
+	{
+		mUIStack.back()->ProcessInput(state);
 	}
 
 	for (auto actor : mActors)
@@ -117,6 +163,11 @@ void Game::HandleKeyPress(int key)
 {
 	switch (key)
 	{
+	case SDLK_ESCAPE:
+		// Create pause menu
+		//new PauseMenu(this);
+		new PauseMenu(this);
+		break;
 	case '-':
 	{
 		// Reduce master volume
@@ -134,6 +185,11 @@ void Game::HandleKeyPress(int key)
 		break;
 	}
 	case '1':
+	{
+		// Load English text
+		LoadText("Assets/English.gptext");
+		break;
+	}
 	case '2':
 	case '3':
 	case '4':
@@ -171,36 +227,66 @@ void Game::UpdateGame()
 	}
 	mTicksCount = SDL_GetTicks();
 
-	// Update all actors
-	mUpdatingActors = true;
-	for (auto actor : mActors)
-	{
-		actor->Update(deltaTime);
-	}
-	mUpdatingActors = false;
+	/*if (mGameState == EStart)
+		new StartMenu(this);*/
 
-	// Move any pending actors to mActors
-	for (auto pending : mPendingActors)
-	{
-		pending->ComputeWorldTransform();
-		mActors.emplace_back(pending);
-	}
-	mPendingActors.clear();
 
-	// Add any dead actors to a temp vector
-	std::vector<Actor*> deadActors;
-	for (auto actor : mActors)
+	if (mGameState == EGameplay)
 	{
-		if (actor->GetState() == Actor::EDead)
+		// Update all actors
+		mUpdatingActors = true;
+		for (auto actor : mActors)
 		{
-			deadActors.emplace_back(actor);
+			actor->Update(deltaTime);
+		}
+		mUpdatingActors = false;
+
+		// Move any pending actors to mActors
+		for (auto pending : mPendingActors)
+		{
+			pending->ComputeWorldTransform();
+			mActors.emplace_back(pending);
+		}
+		mPendingActors.clear();
+
+		// Add any dead actors to a temp vector
+		std::vector<Actor*> deadActors;
+		for (auto actor : mActors)
+		{
+			if (actor->GetState() == Actor::EDead)
+			{
+				deadActors.emplace_back(actor);
+			}
+		}
+		// Delete dead actors (which removes them from mActors)
+		for (auto actor : deadActors)
+		{
+			delete actor;
 		}
 	}
+	
 
-	// Delete dead actors (which removes them from mActors)
-	for (auto actor : deadActors)
+	// Update UI screens
+	for (auto ui : mUIStack)
 	{
-		delete actor;
+		if (ui->GetState() == UIScreen::EActive)
+		{
+			ui->Update(deltaTime);
+		}
+	}
+	// Delete any UIScreens that are closed
+	auto iter = mUIStack.begin();
+	while (iter != mUIStack.end())
+	{
+		if ((*iter)->GetState() == UIScreen::EClosing)
+		{
+			delete* iter;
+			iter = mUIStack.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
 	}
 
 	// Update audio system
@@ -270,6 +356,14 @@ void Game::GenerateOutput()
 
 void Game::LoadData()
 {
+	// Load English text
+	LoadText("Assets/English.gptext");
+
+
+	// UI elements
+	//mHUD = new HUD(this);
+
+
 	// Create actors
 	Actor* a = new Actor(this);
 	a->SetPosition(Vector3(200.0f, 75.0f, 0.0f));
@@ -388,6 +482,12 @@ void Game::UnloadData()
 	{
 		delete mActors.back();
 	}
+	// Clear the UI stack
+	while (!mUIStack.empty())
+	{
+		delete mUIStack.back();
+		mUIStack.pop_back();
+	}
 
 	if (mRenderer)
 	{
@@ -442,6 +542,86 @@ void Game::RemoveActor(Actor* actor)
 		mActors.pop_back();
 	}
 }
+void Game::PushUI(UIScreen* screen)
+{
+	mUIStack.emplace_back(screen);
+}
+Font* Game::GetFont(const std::string& fileName)
+{
+	auto iter = mFonts.find(fileName);
+	if (iter != mFonts.end())
+	{
+		return iter->second;
+	}
+	else
+	{
+		Font* font = new Font(this);
+		if (font->Load(fileName))
+		{
+			mFonts.emplace(fileName, font);
+		}
+		else
+		{
+			font->Unload();
+			delete font;
+			font = nullptr;
+		}
+		return font;
+	}
+}
+
+void Game::LoadText(const std::string& fileName)
+{
+	// Clear the existing map, if already loaded
+	mText.clear();
+	// Try to open the file
+	std::ifstream file(fileName);
+	if (!file.is_open())
+	{
+		SDL_Log("Text file %s not found", fileName.c_str());
+		return;
+	}
+	// Read the entire file to a string stream
+	std::stringstream fileStream;
+	fileStream << file.rdbuf();
+	std::string contents = fileStream.str();
+	// Open this file in rapidJSON
+	rapidjson::StringStream jsonStr(contents.c_str());
+	rapidjson::Document doc;
+	doc.ParseStream(jsonStr);
+	if (!doc.IsObject())
+	{
+		SDL_Log("Text file %s is not valid JSON", fileName.c_str());
+		return;
+	}
+	// Parse the text map
+	const rapidjson::Value& actions = doc["TextMap"];
+	for (rapidjson::Value::ConstMemberIterator itr = actions.MemberBegin();
+		itr != actions.MemberEnd(); ++itr)
+	{
+		if (itr->name.IsString() && itr->value.IsString())
+		{
+			mText.emplace(itr->name.GetString(),
+				itr->value.GetString());
+		}
+	}
+}
+
+const std::string& Game::GetText(const std::string& key)
+{
+	static std::string errorMsg("**KEY NOT FOUND**");
+	// Find this text in the map, if it exists
+	auto iter = mText.find(key);
+	if (iter != mText.end())
+	{
+		return iter->second;
+	}
+	else
+	{
+		return errorMsg;
+	}
+}
+
 
 void Game::ChangeCamera(int mode)
 {
@@ -460,13 +640,14 @@ void Game::ChangeCamera(int mode)
 	{
 	case '1':
 	default:
-		mFPSActor->SetState(Actor::EActive);
-		mFPSActor->SetVisible(true);
-		mCrosshair->SetVisible(true);
-		break;
-	case '2':
 		mFollowActor->SetState(Actor::EActive);
 		mFollowActor->SetVisible(true);
+		/*mOrbitActor->SetState(Actor::EActive);
+		mOrbitActor->SetVisible(true);
+		mFPSActor->SetState(Actor::EActive);
+		mFPSActor->SetVisible(true);
+		mCrosshair->SetVisible(true);*/
+
 		break;
 	case '3':
 		mOrbitActor->SetState(Actor::EActive);

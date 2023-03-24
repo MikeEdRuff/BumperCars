@@ -6,24 +6,14 @@
 // See LICENSE in root directory for full details.
 // ----------------------------------------------------------------
 
-#include <string>
+#pragma once
+#include "UIScreen.h"
 
-class Texture
+class DialogBox : public UIScreen
 {
 public:
-	Texture();
-	~Texture();
-
-	bool Load(const std::string& fileName);
-	void Unload();
-	void CreateFromSurface(struct SDL_Surface* surface);
-
-	void SetActive();
-
-	int GetWidth() const { return mWidth; }
-	int GetHeight() const { return mHeight; }
-private:
-	unsigned int mTextureID;
-	int mWidth;
-	int mHeight;
+	// (Lower draw order corresponds with further back)
+	DialogBox(class Game* game, const std::string& text,
+		std::function<void()> onOK);
+	~DialogBox();
 };
