@@ -52,7 +52,7 @@ bool Renderer::Initialize(float screenWidth, float screenHeight)
 	mWindow = SDL_CreateWindow("XTREME BUMPER CARS", 100, 100,
 		static_cast<int>(mScreenWidth), static_cast<int>(mScreenHeight), SDL_WINDOW_OPENGL);
 
-	// MER Make fullscreen
+	// Make fullscreen MER
 	SDL_SetWindowFullscreen(mWindow, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
 	if (!mWindow)
