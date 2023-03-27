@@ -49,7 +49,7 @@ bool Game::Initialize()
 
 	// Create the renderer
 	mRenderer = new Renderer(this);
-	if (!mRenderer->Initialize(1920.0f, 1080.0f))
+	if (!mRenderer->Initialize(960.0f, 540.0f))
 	{
 		SDL_Log("Failed to initialize renderer");
 		delete mRenderer;

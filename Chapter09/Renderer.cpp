@@ -53,7 +53,7 @@ bool Renderer::Initialize(float screenWidth, float screenHeight)
 		static_cast<int>(mScreenWidth), static_cast<int>(mScreenHeight), SDL_WINDOW_OPENGL);
 
 	// Make fullscreen MER
-	SDL_SetWindowFullscreen(mWindow, SDL_WINDOW_MINIMIZED);
+	SDL_SetWindowFullscreen(mWindow, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
 	if (!mWindow)
 	{
