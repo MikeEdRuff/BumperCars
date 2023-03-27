@@ -179,6 +179,7 @@ void Game::HandleKeyPress(int key)
 		mAudioSystem->SetBusVolume("bus:/", volume);
 		break;
 	}
+	/*
 	case SDL_BUTTON_LEFT:
 	{
 		// Get start point (in center of screen on near plane)
@@ -192,6 +193,7 @@ void Game::HandleKeyPress(int key)
 		mEndSphere->SetPosition(end);
 		break;
 	}
+	*/
 	default:
 		break;
 	}

@@ -6,6 +6,12 @@
 // See LICENSE in root directory for full details.
 // ----------------------------------------------------------------
 
+////////////////////
+// Edited by Jackson Wise, Spring 2023
+// Edited to fit the parameters of the game X-TREME BUMPER CARS
+// Added drift mechanics, boost mechanics, and more realistic car physics
+////////////////////
+
 #include "FollowActor.h"
 #include "MeshComponent.h"
 #include "Game.h"
@@ -101,8 +107,9 @@ void FollowActor::ActorInput(const uint8_t* keys)
 
 void FollowActor::UpdateActor(float deltaTime)
 {
-	if (mBoostDuration <= 3.0f) // Only 3 seconds of boost allowed
-		mBoostDuration += deltaTime;
+	// Jackson Wise
+	if (mBoostDuration <= 6.0f)
+		mBoostDuration += deltaTime; 
 	mBoostCooldown -= deltaTime;
 }
 
