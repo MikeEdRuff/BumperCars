@@ -294,19 +294,40 @@ void Game::LoadData()
 
 	// Create actors
 	Actor* a = new Actor(this);
-	a->SetPosition(Vector3(200.0f, 75.0f, 0.0f));
-	a->SetScale(100.0f);
 	Quaternion q(Vector3::UnitY, -Math::PiOver2);
 	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi + Math::Pi / 4.0f));
-	a->SetRotation(q);
 	MeshComponent* mc = new MeshComponent(a);
+	a->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
+	a->SetScale(0.0f);
+	a->SetRotation(q);
 	mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
 
-	a = new Actor(this);
-	a->SetPosition(Vector3(200.0f, -75.0f, 0.0f));
-	a->SetScale(3.0f);
-	mc = new MeshComponent(a);
-	mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
+	float boxCoordsX[] = { 3000,800,1700,2200,800, 2000,3000, 4000, 200, 2500 };
+	float boxCoordsY[] = { 4000, 2000, 100, 2500, 3500, 1800, 3000, 4000, 600, 3400 };
+	float boxCoordsZ = -50.0f;
+	float boxSizes[] = { 200.0f, 300.0f, 250.0f, 300.0f, 180.0f, 200.0f, 150.0f, 300.0f, 280.0f, 160.0f };
+
+
+	for (int i = 0; i < 10; ++i) {
+		a = new Actor(this);
+		a->SetPosition(Vector3(boxCoordsX[i], boxCoordsY[i], boxCoordsZ));
+		a->SetScale(boxSizes[i]);
+		mc = new MeshComponent(a);
+		mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
+	}
+
+	float rockCoordsX[] = { 400,1000,700,2000,2500,1800,3000, 4000, 600, 3400 };
+	float rockCoordsY[] = { 2000,400,1200,2700,100, 1700,2000, 4000, 10, 2000 };
+	float rockCoordsZ = -100.0f;
+	float rockSizes[] = { 8.0f, 5.0f, 10.0f, 3.0f, 8.0f, 4.0f, 9.0f, 3.0f, 8.0f, 6.0f };
+
+	for (int i = 0; i < 10; ++i) {
+		a = new Actor(this);
+		a->SetPosition(Vector3(rockCoordsX[i], rockCoordsY[i], rockCoordsZ));
+		a->SetScale(rockSizes[i]);
+		mc = new MeshComponent(a);
+		mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
+	}
 
 	// Setup floor
 	float start = -1250.0f;
