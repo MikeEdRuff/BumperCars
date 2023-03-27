@@ -14,12 +14,14 @@
 #include "VertexArray.h"
 #include "SpriteComponent.h"
 #include "MeshComponent.h"
+#include "UIScreen.h"
+#include "Game.h"
 #include <GL/glew.h>
 
 Renderer::Renderer(Game* game)
 	:mGame(game)
-	,mSpriteShader(nullptr)
-	,mMeshShader(nullptr)
+	, mSpriteShader(nullptr)
+	, mMeshShader(nullptr)
 {
 }
 
@@ -49,12 +51,8 @@ bool Renderer::Initialize(float screenWidth, float screenHeight)
 	// Force OpenGL to use hardware acceleration
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
-	mWindow = SDL_CreateWindow("XTREME BUMPER CARS", 100, 100,
+	mWindow = SDL_CreateWindow("Game Programming in C++ (Chapter 11)", 100, 100,
 		static_cast<int>(mScreenWidth), static_cast<int>(mScreenHeight), SDL_WINDOW_OPENGL);
-
-	// Make fullscreen MER
-	SDL_SetWindowFullscreen(mWindow, SDL_WINDOW_FULLSCREEN_DESKTOP);
-
 	if (!mWindow)
 	{
 		SDL_Log("Failed to create window: %s", SDL_GetError());
@@ -163,6 +161,12 @@ void Renderer::Draw()
 		}
 	}
 
+	// Draw any UI screens
+	for (auto ui : mGame->GetUIStack())
+	{
+		ui->Draw(mSpriteShader);
+	}
+
 	// Swap the buffers
 	SDL_GL_SwapWindow(mWindow);
 }
@@ -228,7 +232,7 @@ Texture* Renderer::GetTexture(const std::string& fileName)
 	return tex;
 }
 
-Mesh* Renderer::GetMesh(const std::string & fileName)
+Mesh* Renderer::GetMesh(const std::string& fileName)
 {
 	Mesh* m = nullptr;
 	auto iter = mMeshes.find(fileName);
