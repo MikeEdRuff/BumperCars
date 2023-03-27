@@ -8,6 +8,7 @@
 #include "Renderer.h"
 #include "MoveComponent.h"
 #include "CircleComponent.h"
+#include <math.h>
 AiCar::AiCar(Game* game)
 	:Actor(game)
 {
@@ -19,12 +20,28 @@ AiCar::AiCar(Game* game)
 	mCircle->SetRadius(100.0f);
 
 	mMoveComp = new MoveComponent(this);
+	mMoveComp->SetForwardSpeed(2000);
 }
 
 void AiCar::AiCarMovement()
 {
-	mMoveComp->SetForwardSpeed(2000);
-	mMoveComp->SetAngularSpeed(5);
+	float targetYtemp = targetY[seed][currentTarget];
+	float currentY = GetPosition().y;
+	float targetXtemp = targetX[seed][currentTarget];
+	float currentX = GetPosition().x;
+
+	if (currentY > targetYtemp - 100 && currentY <  targetYtemp + 100)
+	{
+		if (currentTarget == 10)
+			currentTarget = 0;
+		else
+			currentTarget++;
+		targetYtemp = targetY[seed][currentTarget];
+		targetXtemp = targetX[seed][currentTarget];
+	}
+	float angle = Math::Atan2(targetYtemp - currentY, targetXtemp - currentX);
+	Quaternion q(UnitZ, angle);
+	SetRotation(q);
 	
 }
 
@@ -32,7 +49,7 @@ void AiCar::Update() //Carl McAninch
 {
 	if (Intersect(*(GetGame()->GetPlayerCar().GetCircle()), *mCircle))
 	{
-		SetPosition(Vector3(1000000,100000,100000));
+		mMeshComp->SetVisible(false);
 	}
 }
 

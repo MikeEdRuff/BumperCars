@@ -49,7 +49,7 @@ bool Game::Initialize()
 
 	// Create the renderer
 	mRenderer = new Renderer(this);
-	if (!mRenderer->Initialize(960.0f, 540.0f))
+	if (!mRenderer->Initialize(1920.0f, 1080.0f))
 	{
 		SDL_Log("Failed to initialize renderer");
 		delete mRenderer;
@@ -208,7 +208,8 @@ void Game::UpdateGame()
 
 	mAiCarOne->Update();//Carl McAninch
 	mAiCarTwo->Update();	
-	mAiCarThree->Update();		
+	mAiCarThree->Update();
+
 	// Compute delta time
 	// Wait until 16ms has elapsed since last frame
 	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16))

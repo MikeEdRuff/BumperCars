@@ -62,6 +62,8 @@ bool Renderer::Initialize(float screenWidth, float screenHeight)
 	// Create an OpenGL context
 	mContext = SDL_GL_CreateContext(mWindow);
 
+	//SDL_SetWindowFullscreen(mWindow, SDL_WINDOW_FULLSCREEN_DESKTOP);
+
 	// Initialize GLEW
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK)
