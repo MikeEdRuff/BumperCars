@@ -38,4 +38,38 @@ void MoveComponent::Update(float deltaTime)
 		pos += mOwner->GetRight() * mStrafeSpeed * deltaTime;
 		mOwner->SetPosition(pos);
 	}
+
+
+
+
+	float start = -1250.0f;
+	float size = 500.0f;
+	const int ySize = 25;
+	const int xSize = 25;
+	int roomSize = size * 19;
+
+	Vector3 pos = mOwner->GetPosition();		//Carl McAninch wall collisions
+	for (int i = 0; i < 25; i++)
+	{
+		if (pos.y < start - size + 100.0f)
+		{
+			mOwner->SetPosition(Vector3(pos.x, start - size + 100.0f, pos.z));
+		}
+		if (pos.y > -start + size + roomSize - 100.0f)
+		{
+			mOwner->SetPosition(Vector3(pos.x, -start + size + roomSize - 100.0f, pos.z));
+		}
+	}
+
+	for (int i = 0; i < 25; i++)
+	{
+		if (pos.x > -start + size + roomSize - 100.0f)
+		{
+			mOwner->SetPosition(Vector3(-start + size + roomSize - 100.0f, pos.y, pos.z));
+		}
+		if (pos.x < start - size + 100.0f)
+		{
+			mOwner->SetPosition(Vector3(start - size + 100.0f, pos.y, pos.z));
+		}
+	}
 }
