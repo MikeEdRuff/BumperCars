@@ -246,7 +246,7 @@ void Game::LoadData()
 		}
 	}
 
-	int roomSize = 3000;
+	int roomSize = size*19;
 
 	// Left/right walls
 	q = Quaternion(Vector3::UnitX, Math::PiOver2);

@@ -61,7 +61,7 @@ void FollowActor::ActorInput(const uint8_t* keys)
 		if (mForwardSpeed > -maxSpeed/2)
 			mForwardSpeed -= mAcceleration;
 	}
-	if (keys[SDL_SCANCODE_A])
+	if (keys[SDL_SCANCODE_A] && mForwardSpeed != 0.0f)
 	{
 		angularSpeed -= Math::Pi;
 
@@ -69,7 +69,7 @@ void FollowActor::ActorInput(const uint8_t* keys)
 		if (keys[SDL_SCANCODE_LSHIFT])
 			angularSpeed *= 1.5;
 	}
-	if (keys[SDL_SCANCODE_D])
+	if (keys[SDL_SCANCODE_D] && mForwardSpeed != 0.0f)
 	{
 		angularSpeed += Math::Pi;
 
