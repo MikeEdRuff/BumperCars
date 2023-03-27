@@ -50,7 +50,9 @@ private:
 
 	// Game-specific code
 	class SkyBox* mySkyBox;
-	class AiCar* mAiCar;
+	class AiCar* mAiCarOne;
+	class AiCar* mAiCarTwo;
+	class AiCar* mAiCarThree;
 	class FollowActor* mFollowActor;
 	class OrbitActor* mOrbitActor;
 	class SplineActor* mSplineActor;

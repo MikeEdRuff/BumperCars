@@ -155,7 +155,11 @@ void Game::HandleKeyPress(int key)
 void Game::UpdateGame()
 {
 	// MER Make Car Move
-	mAiCar->AiCarMovementPatrol();
+	mAiCarOne->AiCarMovement();
+	mAiCarTwo->AiCarMovement();
+	mAiCarThree->AiCarMovement();
+
+
 	// Compute delta time
 	// Wait until 16ms has elapsed since last frame
 	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16))
@@ -309,7 +313,12 @@ void Game::LoadData()
 	mSplineActor = new SplineActor(this);
 
 	// create aicar MER
-	mAiCar = new AiCar(this);
+	mAiCarOne = new AiCar(this);
+	mAiCarTwo = new AiCar(this);
+	mAiCarThree = new AiCar(this);
+	mAiCarOne->AiSeedSet(0);
+	mAiCarTwo->AiSeedSet(1);
+	mAiCarThree->AiSeedSet(2);
 
 	// create skybox
 	mySkyBox = new SkyBox(this);

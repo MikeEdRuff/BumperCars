@@ -12,8 +12,9 @@ public:
 
 	//void ActorInput(const uint8_t* keys) override;
 
-	void AiCarMovementPatrol();
-	void AiCarMovementRun();
+	void AiCarMovement();
+
+	void AiSeedSet(int setSeed);
 
 	void SetVisible(bool visible);
 private:
@@ -22,8 +23,9 @@ private:
 	class MeshComponent* mMeshComp;
 	const float mAcceleration = 20.0f;
 	float mForwardSpeed;
-	int currentTarget = 0;
-	int xTargets[5] = { 0, 1000, 1500, 0, -1000 };
-	int yTargets[5] = { 0, 1000, 1500, 0, -1000 };
+
+	// seed decides spawn location and movement of the car
+	int seed;
+	Vector3 spawn[3] = { Vector3(1000.0f, 1000.0f, -100.0f), Vector3(2000,2000,-100), Vector3(3000,3000,-100) };
 
 };

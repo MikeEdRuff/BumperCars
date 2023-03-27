@@ -13,21 +13,23 @@ AiCar::AiCar(Game* game)
 {
 	mMeshComp = new MeshComponent(this);
 	mMeshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/aiCar.gpmesh"));
-	SetPosition(Vector3(1000.0f, 1000.0f, -100.0f));
+	SetPosition(Vector3(0,0,0));
 
 	mMoveComp = new MoveComponent(this);
 }
 
-void AiCar::AiCarMovementPatrol()
+void AiCar::AiCarMovement()
 {
 	mMoveComp->SetForwardSpeed(2000);
 	mMoveComp->SetAngularSpeed(5);
 	
 }
 
-void AiCar::AiCarMovementRun()
+// Sets the seed and spawn location of the car
+void AiCar::AiSeedSet(int setSeed)
 {
-
+	seed = setSeed;
+	SetPosition(spawn[seed]);
 }
 
 /*
