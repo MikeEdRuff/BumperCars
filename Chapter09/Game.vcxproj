@@ -18,9 +18,11 @@
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="CircleComponent.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="DialogBox.cpp" />
     <ClCompile Include="FloorActor.cpp" />
     <ClCompile Include="FollowActor.cpp" />
     <ClCompile Include="FollowCamera.cpp" />
+    <ClCompile Include="Font.cpp" />
     <ClCompile Include="FPSCamera.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -30,6 +32,7 @@
     <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="OrbitActor.cpp" />
     <ClCompile Include="OrbitCamera.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="PlaneActor.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -38,7 +41,9 @@
     <ClCompile Include="SplineActor.cpp" />
     <ClCompile Include="SplineCamera.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
+    <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="UIScreen.cpp" />
     <ClCompile Include="VertexArray.cpp" />
     <ClCompile Include="WallActor.cpp" />
   </ItemGroup>
@@ -50,9 +55,11 @@
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="CircleComponent.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="DialogBox.h" />
     <ClInclude Include="FloorActor.h" />
     <ClInclude Include="FollowActor.h" />
     <ClInclude Include="FollowCamera.h" />
+    <ClInclude Include="Font.h" />
     <ClInclude Include="FPSCamera.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Math.h" />
@@ -61,6 +68,7 @@
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="OrbitActor.h" />
     <ClInclude Include="OrbitCamera.h" />
+    <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="PlaneActor.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
@@ -69,7 +77,9 @@
     <ClInclude Include="SplineActor.h" />
     <ClInclude Include="SplineCamera.h" />
     <ClInclude Include="SpriteComponent.h" />
+    <ClInclude Include="StartMenu.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="UIScreen.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="WallActor.h" />
   </ItemGroup>
