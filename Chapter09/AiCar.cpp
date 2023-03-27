@@ -7,13 +7,16 @@
 #include "Game.h"
 #include "Renderer.h"
 #include "MoveComponent.h"
-
+#include "CircleComponent.h"
 AiCar::AiCar(Game* game)
 	:Actor(game)
 {
 	mMeshComp = new MeshComponent(this);
 	mMeshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/aiCar.gpmesh"));
 	SetPosition(Vector3(0,0,0));
+
+	mCircle = new CircleComponent(this);	//carl Mcaninch
+	mCircle->SetRadius(100.0f);
 
 	mMoveComp = new MoveComponent(this);
 }
@@ -23,6 +26,14 @@ void AiCar::AiCarMovement()
 	mMoveComp->SetForwardSpeed(2000);
 	mMoveComp->SetAngularSpeed(5);
 	
+}
+
+void AiCar::Update() //Carl McAninch
+{
+	if (Intersect(*(GetGame()->GetPlayerCar().GetCircle()), *mCircle))
+	{
+		SetPosition(Vector3(1000000,100000,100000));
+	}
 }
 
 // Sets the seed and spawn location of the car

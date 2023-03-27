@@ -13,7 +13,7 @@
 #include <vector>
 #include "Math.h"
 #include "SoundEvent.h"
-
+#include "FollowActor.h"
 class Game
 {
 public:
@@ -46,7 +46,8 @@ public:
 
 	void LoadText(const std::string& fileName);
 	const std::string& GetText(const std::string& key);
-
+	class FollowActor& GetPlayerCar() { return *mFollowActor; }	//Carl McAninch
+	
 private:
 	void ProcessInput();
 	void HandleKeyPress(int key);
@@ -55,11 +56,11 @@ private:
 	void LoadData();
 	void UnloadData();
 
+
 	// All the actors in the game
 	std::vector<class Actor*> mActors;
 	std::vector<class UIScreen*> mUIStack;
 	std::unordered_map<std::string, class Font*> mFonts;
-
 	// Map for text localization
 	std::unordered_map<std::string, std::string> mText;
 	// Any pending actors

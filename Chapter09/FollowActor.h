@@ -17,7 +17,7 @@ public:
 	void ActorInput(const uint8_t* keys) override;
 
 	void UpdateActor(float deltaTime);
-
+	class CircleComponent* GetCircle() { return mCircle; } //Carl McAninch
 	void SetVisible(bool visible);
 private:
 	class MoveComponent* mMoveComp;
@@ -27,4 +27,5 @@ private:
 	float mForwardSpeed;
 	float mBoostCooldown; // Cooldown to next boost
 	float mBoostDuration; // Duration of boost
+	class CircleComponent* mCircle;		//Carl McAninch
 };

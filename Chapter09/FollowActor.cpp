@@ -18,6 +18,8 @@
 #include "Renderer.h"
 #include "FollowCamera.h"
 #include "MoveComponent.h"
+#include "AiCar.h"
+#include "CircleComponent.h"
 
 FollowActor::FollowActor(Game* game)
 	:Actor(game)
@@ -29,6 +31,8 @@ FollowActor::FollowActor(Game* game)
 	mMoveComp = new MoveComponent(this);
 	mCameraComp = new FollowCamera(this);
 	mCameraComp->SnapToIdeal();
+	mCircle = new CircleComponent(this);
+	mCircle->SetRadius(100.0f);
 }
 
 void FollowActor::ActorInput(const uint8_t* keys)
@@ -103,6 +107,8 @@ void FollowActor::ActorInput(const uint8_t* keys)
 	{
 		mCameraComp->SetHorzDist(350.0f);
 	}
+
+	
 }
 
 void FollowActor::UpdateActor(float deltaTime)

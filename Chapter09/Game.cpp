@@ -206,7 +206,9 @@ void Game::UpdateGame()
 	mAiCarTwo->AiCarMovement();
 	mAiCarThree->AiCarMovement();
 
-
+	mAiCarOne->Update();//Carl McAninch
+	mAiCarTwo->Update();	
+	mAiCarThree->Update();		
 	// Compute delta time
 	// Wait until 16ms has elapsed since last frame
 	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16))

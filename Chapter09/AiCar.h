@@ -15,7 +15,7 @@ public:
 	void AiCarMovement();
 
 	void AiSeedSet(int setSeed);
-
+	void Update();
 	void SetVisible(bool visible);
 private:
 	class MoveComponent* mMoveComp;
@@ -24,8 +24,9 @@ private:
 	const float mAcceleration = 20.0f;
 	float mForwardSpeed;
 
+
 	// seed decides spawn location and movement of the car
 	int seed;
 	Vector3 spawn[3] = { Vector3(1000.0f, 1000.0f, -100.0f), Vector3(2000,2000,-100), Vector3(3000,3000,-100) };
-
+	class CircleComponent* mCircle;	// Carl McANinch
 };
