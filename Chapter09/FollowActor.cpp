@@ -20,6 +20,7 @@
 #include "MoveComponent.h"
 #include "AiCar.h"
 #include "CircleComponent.h"
+#include "SphereActor.h"
 
 FollowActor::FollowActor(Game* game)
 	:Actor(game)
@@ -52,14 +53,14 @@ void FollowActor::ActorInput(const uint8_t* keys)
 		//BOOOOOOST
 		if (keys[SDL_SCANCODE_SPACE] && mForwardSpeed < maxBoost && mBoostCooldown <= 0.0f)
 		{
-			// JCW - If there is boost to use
+			// Jackson Wise - If there is boost to use
 			if (mBoostDuration > 0.0f)
 			{
 				mForwardSpeed += mAcceleration * 2;
 				mBoostDuration -= 0.1f;
 			}
 
-			// JCW - Once the boost is used up
+			// Jackson Wise - Once the boost is used up
 			else if (mBoostDuration <= 0.0f)
 			{
 				mBoostCooldown = 2.0f; // JCW - Time until next boost (2 seconds)
@@ -68,6 +69,7 @@ void FollowActor::ActorInput(const uint8_t* keys)
 	}
 	if (keys[SDL_SCANCODE_S])
 	{
+		// Jackson Wise
 		if (mForwardSpeed > -maxSpeed/2)
 			mForwardSpeed -= mAcceleration;
 	}
@@ -75,7 +77,7 @@ void FollowActor::ActorInput(const uint8_t* keys)
 	{
 		angularSpeed -= Math::Pi;
 
-		// JCW - Drift Mechanics
+		// Jackson Wise - Drift Mechanics
 		if (keys[SDL_SCANCODE_LSHIFT])
 			angularSpeed *= 1.5;
 	}
@@ -83,12 +85,12 @@ void FollowActor::ActorInput(const uint8_t* keys)
 	{
 		angularSpeed += Math::Pi;
 
-		// JCW - Drift Mechanics
+		// Jackson Wise - Drift Mechanics
 		if (keys[SDL_SCANCODE_LSHIFT])
 			angularSpeed *= 1.5;
 	} 
 
-	// JCW - Gradually slows down if nothing is being done
+	// Jackson Wise - Gradually slows down if nothing is being done
 	else
 	{
 		if (mForwardSpeed > 0)
@@ -113,10 +115,20 @@ void FollowActor::ActorInput(const uint8_t* keys)
 
 void FollowActor::UpdateActor(float deltaTime)
 {
-	// Jackson Wise
+	// Jackson Wise - Updating boost duration and boost cooldown as time progresses
 	if (mBoostDuration <= 6.0f)
 		mBoostDuration += deltaTime; 
 	mBoostCooldown -= deltaTime;
+	
+	// Jackson Wise - Collisions with the obstacles
+	for (auto sphere : GetGame()->GetSpheres())
+	{
+		if (Intersect(*mCircle, *sphere->GetCircle()))
+		{
+			mForwardSpeed = 0.0f;
+		}
+	}
+
 }
 
 void FollowActor::SetVisible(bool visible)

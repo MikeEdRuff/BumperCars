@@ -47,6 +47,9 @@ public:
 	void LoadText(const std::string& fileName);
 	const std::string& GetText(const std::string& key);
 	class FollowActor& GetPlayerCar() { return *mFollowActor; }	//Carl McAninch
+	std::vector<class SphereActor*>& GetSpheres() { return mSphereActors; } //Jackson Wise
+
+	void AddSphere(SphereActor* sphere); // Jackson Wise
 	
 private:
 	void ProcessInput();
@@ -80,6 +83,7 @@ private:
 	class AiCar* mAiCarTwo;
 	class AiCar* mAiCarThree;
 	class FollowActor* mFollowActor;
+	std::vector<class SphereActor*> mSphereActors; // Jackson Wise
 	class OrbitActor* mOrbitActor;
 	class SplineActor* mSplineActor;
 	class Actor* mStartSphere;

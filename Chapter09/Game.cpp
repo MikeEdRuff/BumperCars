@@ -13,8 +13,8 @@
 #include "Actor.h"
 #include "SpriteComponent.h"
 #include "MeshComponent.h"
-#include "WallActor.h"	// JCW
-#include "FloorActor.h"	//JCW
+#include "WallActor.h"	// Jackson Wise
+#include "FloorActor.h"	// Jackson Wise
 #include "AiCar.h" //MER
 #include "SkyBox.h"
 #include "AudioComponent.h"
@@ -25,6 +25,7 @@
 #include "Font.h"//CB
 #include "PauseMenu.h"//CB
 #include "StartMenu.h"//CB
+#include "SphereActor.h" // Jackson Wise
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 #include <fstream>
@@ -312,26 +313,24 @@ void Game::LoadData()
 	float boxCoordsZ = -50.0f;
 	float boxSizes[] = { 200.0f, 300.0f, 250.0f, 300.0f, 180.0f, 200.0f, 150.0f, 300.0f, 280.0f, 160.0f };
 
-
+	/*
 	for (int i = 0; i < 10; ++i) {
-		a = new Actor(this);
+		a = new SphereActor(this);
 		a->SetPosition(Vector3(boxCoordsX[i], boxCoordsY[i], boxCoordsZ));
 		a->SetScale(boxSizes[i]);
 		mc = new MeshComponent(a);
 		mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
 	}
+	*/
 
 	float rockCoordsX[] = { 400,1000,700,2000,2500,1800,3000, 4000, 600, 3400 };
 	float rockCoordsY[] = { 2000,400,1200,2700,100, 1700,2000, 4000, 10, 2000 };
 	float rockCoordsZ = -100.0f;
 	float rockSizes[] = { 8.0f, 5.0f, 10.0f, 3.0f, 8.0f, 4.0f, 9.0f, 3.0f, 8.0f, 6.0f };
 
+	// Adding the obstacles
 	for (int i = 0; i < 10; ++i) {
-		a = new Actor(this);
-		a->SetPosition(Vector3(rockCoordsX[i], rockCoordsY[i], rockCoordsZ));
-		a->SetScale(rockSizes[i]);
-		mc = new MeshComponent(a);
-		mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
+		new SphereActor(this, rockCoordsX[i], rockCoordsY[i], rockCoordsZ, rockSizes[i]);
 	}
 
 	// Setup floor
@@ -355,11 +354,11 @@ void Game::LoadData()
 	q = Quaternion(Vector3::UnitX, Math::PiOver2);
 	for (int i = 0; i < 25; i++)
 	{
-		a = new WallActor(this); //JCW
+		a = new WallActor(this); // Jackson Wise
 		a->SetPosition(Vector3(start + i * size, start - size, 0.0f));
 		a->SetRotation(q);
 		
-		a = new WallActor(this); //JCW
+		a = new WallActor(this); // Jackson Wise
 		a->SetPosition(Vector3(start + i * size, -start + size + roomSize, 0.0f));
 		a->SetRotation(q);
 	}
@@ -368,11 +367,11 @@ void Game::LoadData()
 	// Forward/back walls
 	for (int i = 0; i < 25; i++)
 	{
-		a = new WallActor(this); //JCW
+		a = new WallActor(this); // Jackson Wise
 		a->SetPosition(Vector3(start - size, start + i * size, 0.0f));
 		a->SetRotation(q);
 
-		a = new WallActor(this); //JCW
+		a = new WallActor(this); // Jackson Wise
 		a->SetPosition(Vector3(-start + size + roomSize, start + i * size, 0.0f));
 		a->SetRotation(q);
 	}
@@ -595,4 +594,10 @@ const std::string& Game::GetText(const std::string& key)
 	{
 		return errorMsg;
 	}
+}
+
+// Jackson Wise
+void Game::AddSphere(SphereActor* sphere)
+{
+	mSphereActors.emplace_back(sphere);
 }
