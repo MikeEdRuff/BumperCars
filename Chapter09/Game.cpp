@@ -197,15 +197,11 @@ void Game::HandleKeyPress(int key)
 
 void Game::UpdateGame()
 {
-
 	// MER Make Car Move
 	mAiCarOne->AiCarMovement();
 	mAiCarTwo->AiCarMovement();
 	mAiCarThree->AiCarMovement();
 
-	mAiCarOne->Update();//Carl McAninch
-	mAiCarTwo->Update();	
-	mAiCarThree->Update();
 
 	float speed = mFollowActor->getForwardSpeed();		//Caleb Bellisle
 
@@ -214,7 +210,13 @@ void Game::UpdateGame()
 	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16))
 		;
 
+
 	float deltaTime = (SDL_GetTicks() - mTicksCount) / 1000.0f;
+
+	mAiCarOne->Update(deltaTime);//Carl McAninch
+	mAiCarTwo->Update(deltaTime);
+	mAiCarThree->Update(deltaTime);
+
 	if (deltaTime > 0.05f)
 	{
 		deltaTime = 0.05f;

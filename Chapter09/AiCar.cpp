@@ -45,7 +45,7 @@ void AiCar::AiCarMovement()
 	
 }
 
-void AiCar::Update() //Carl McAninch
+void AiCar::Update(float deltaTime) //Carl McAninch
 {
 	if (Intersect(*(GetGame()->GetPlayerCar().GetCircle()), *mCircle))
 	{
@@ -56,6 +56,13 @@ void AiCar::Update() //Carl McAninch
 
 		mMeshComp->SetMesh(GetGame()->GetRenderer()->GetMesh("Assets/Explosion.gpmesh"));
 		SetScale(20);
+
+		mDeathTimer -= deltaTime;
+		if (mDeathTimer <= 0)
+		{
+			mMeshComp->SetVisible(false);
+		}
+
 
 		//Jackson Wise - Adding only one point if the target is destroyed
 		if (firstHit)
