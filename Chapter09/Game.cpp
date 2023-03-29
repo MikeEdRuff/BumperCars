@@ -304,8 +304,8 @@ void Game::LoadData()
 	
 	LoadText("Assets/English.gptext");		//Caleb Bellisle
 
-	// Create actors
-	Actor* a = new Actor(this);
+	// Loads obstacles into game			//Julian Powell
+	Actor* a = new Actor(this);		
 	Quaternion q(Vector3::UnitY, -Math::PiOver2);
 	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi + Math::Pi / 4.0f));
 	MeshComponent* mc = new MeshComponent(a);
