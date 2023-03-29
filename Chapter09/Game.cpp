@@ -15,7 +15,7 @@
 #include "MeshComponent.h"
 #include "WallActor.h"	// Jackson Wise
 #include "FloorActor.h"	// Jackson Wise
-#include "AiCar.h" //MER
+#include "AiCar.h" //Michael Ruff
 #include "SkyBox.h"
 #include "AudioComponent.h"
 #include "FollowActor.h"
@@ -197,7 +197,7 @@ void Game::HandleKeyPress(int key)
 
 void Game::UpdateGame()
 {
-	// MER Make Car Move
+	// Michael Ruff Make Car Move
 	mAiCarOne->AiCarMovement();
 	mAiCarTwo->AiCarMovement();
 	mAiCarThree->AiCarMovement();
@@ -423,7 +423,7 @@ void Game::LoadData()
 	mOrbitActor = new OrbitActor(this);
 	mSplineActor = new SplineActor(this);
 
-	// create aicar MER
+	// create aicar Michael Ruff
 	mAiCarOne = new AiCar(this);
 	mAiCarTwo = new AiCar(this);
 	mAiCarThree = new AiCar(this);
@@ -435,7 +435,7 @@ void Game::LoadData()
 	// create skybox
 	mySkyBox = new SkyBox(this);
 
-	// MER Set Camera 
+	// Michae Ruff Set Camera 
 	mFollowActor->SetState(Actor::EPaused);
 	mFollowActor->SetVisible(false);
 	mOrbitActor->SetState(Actor::EPaused);
