@@ -116,7 +116,6 @@ void Game::ProcessInput()
 				else if (mGameState == EWin)
 				{
 					HandleKeyPress(event.key.keysym.sym);
-					break;
 				}
 				else if (!mUIStack.empty())
 				{
