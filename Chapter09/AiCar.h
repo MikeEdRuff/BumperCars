@@ -15,7 +15,7 @@ public:
 	void AiCarMovement();
 
 	void AiSeedSet(int setSeed);
-	void Update();
+	void Update(float delataTime);
 	void SetVisible(bool visible);
 private:
 	class MoveComponent* mMoveComp;
@@ -23,7 +23,7 @@ private:
 	class MeshComponent* mMeshComp;
 	const float mAcceleration = 20.0f;
 	float mForwardSpeed;
-
+	float mDeathTimer = 3.0f;
 
 	// seed decides spawn location and movement of the car
 	int seed;
