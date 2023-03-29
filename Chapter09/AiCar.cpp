@@ -49,9 +49,14 @@ void AiCar::Update() //Carl McAninch
 {
 	if (Intersect(*(GetGame()->GetPlayerCar().GetCircle()), *mCircle))
 	{
-		// Explosions? - mMeshComp->SetMesh(GetGame()->GetRenderer()->GetMesh("Assets/explosion.gpmesh"));
-		mMeshComp->SetVisible(false);
-		
+		Vector3 pos = GetPosition();
+		mMoveComp->SetAngularSpeed(0);
+		mMoveComp->SetForwardSpeed(0);
+		mMoveComp->SetStrafeSpeed(0);
+
+		mMeshComp->SetMesh(GetGame()->GetRenderer()->GetMesh("Assets/Explosion.gpmesh"));
+		SetScale(20);
+		//mMeshComp->SetVisible(false);
 	}
 }
 
