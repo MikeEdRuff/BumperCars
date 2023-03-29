@@ -31,10 +31,11 @@
 #include <fstream>
 #include <sstream>
 #include <rapidjson/document.h>
+#include "Speedometer.h"
 Game::Game()
 :mRenderer(nullptr)
 ,mAudioSystem(nullptr)
-,mGameState(EGameplay)
+,mGameState(EStart)
 ,mUpdatingActors(false)
 {
 	
@@ -83,6 +84,7 @@ bool Game::Initialize()
 
 void Game::RunLoop()
 {
+	new StartMenu(this);
 	while (mGameState != EQuit)
 	{
 
@@ -211,6 +213,8 @@ void Game::UpdateGame()
 	mAiCarTwo->Update();	
 	mAiCarThree->Update();
 
+	float speed = mFollowActor->getForwardSpeed();
+
 	// Compute delta time
 	// Wait until 16ms has elapsed since last frame
 	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16))
@@ -225,6 +229,8 @@ void Game::UpdateGame()
 
 	if (mGameState == EGameplay)
 	{
+		mSpeedometer->CalcSpeed(mFollowActor);
+
 		// Update all actors
 		mUpdatingActors = true;
 		for (auto actor : mActors)
@@ -383,12 +389,20 @@ void Game::LoadData()
 	dir.mDiffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.mSpecColor = Vector3(0.8f, 0.8f, 0.8f);
 
-	// UI elements
-	a = new Actor(this);
-	a->SetPosition(Vector3(-740.0f, -500.0f, 0.0f));
-	a->SetScale(1.5f);
-	SpriteComponent* sc = new SpriteComponent(a);
-	sc->SetTexture(mRenderer->GetTexture("Assets/HealthBar.png"));
+	// UI elements CAleb bellisle
+	static bool firstrun = false;
+
+	if (firstrun)
+	{
+		a = new Actor(this);
+		a->SetPosition(Vector3(-740.0f, -500.0f, 0.0f));
+		a->SetScale(1.5f);
+		SpriteComponent* sc = new SpriteComponent(a);
+		//sc->SetTexture(mRenderer->GetTexture("Assets/HealthBar.png"));
+		firstrun = true;
+
+	}
+	mSpeedometer = new Speedometer(this);
 
 	/*a = new Actor(this);
 	a->SetPosition(Vector3(-390.0f, 275.0f, 0.0f));
@@ -418,6 +432,7 @@ void Game::LoadData()
 	mAiCarTwo->AiSeedSet(1);
 	mAiCarThree->AiSeedSet(2);
 
+	//if(mGameState != EStart)
 	// create skybox
 	mySkyBox = new SkyBox(this);
 

@@ -38,6 +38,8 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="SoundEvent.cpp" />
+    <ClCompile Include="Speedometer.cpp" />
+    <ClCompile Include="SphereActor.cpp" />
     <ClCompile Include="SplineActor.cpp" />
     <ClCompile Include="SplineCamera.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
@@ -74,6 +76,8 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="skybox.h" />
     <ClInclude Include="SoundEvent.h" />
+    <ClInclude Include="Speedometer.h" />
+    <ClInclude Include="SphereActor.h" />
     <ClInclude Include="SplineActor.h" />
     <ClInclude Include="SplineCamera.h" />
     <ClInclude Include="SpriteComponent.h" />

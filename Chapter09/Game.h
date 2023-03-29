@@ -78,6 +78,8 @@ private:
 
 
 	// Game-specific code
+	class Speedometer* mSpeedometer;
+
 	class SkyBox* mySkyBox;
 	class AiCar* mAiCarOne;
 	class AiCar* mAiCarTwo;

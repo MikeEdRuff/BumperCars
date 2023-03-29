@@ -48,6 +48,7 @@ class UIScreen
 {
 public:
 	UIScreen(class Game* game);
+	UIScreen(Game* game, float x, float y);
 	virtual ~UIScreen();
 	// UIScreen subclasses can override these
 	virtual void Update(float deltaTime);

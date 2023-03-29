@@ -19,6 +19,7 @@ public:
 	void UpdateActor(float deltaTime);
 	class CircleComponent* GetCircle() { return mCircle; } //Carl McAninch
 	void SetVisible(bool visible);
+	float getForwardSpeed() { return mForwardSpeed; }
 private:
 	class MoveComponent* mMoveComp;
 	class FollowCamera* mCameraComp;

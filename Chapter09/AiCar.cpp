@@ -51,6 +51,7 @@ void AiCar::Update() //Carl McAninch
 	{
 		// Explosions? - mMeshComp->SetMesh(GetGame()->GetRenderer()->GetMesh("Assets/explosion.gpmesh"));
 		mMeshComp->SetVisible(false);
+		
 	}
 }
 

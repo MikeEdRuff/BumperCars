@@ -17,7 +17,23 @@ UIScreen::UIScreen(Game* game)
 	:mGame(game)
 	, mTitle(nullptr)
 	, mBackground(nullptr)
-	, mTitlePos(0.0f, 300.0f)
+	, mTitlePos(0.0f, 0.0f)
+	, mNextButtonPos(0.0f, 200.0f)
+	, mBGPos(0.0f, 250.0f)
+	, mState(EActive)
+{
+	// Add to UI Stack
+	mGame->PushUI(this);
+	mFont = mGame->GetFont("Assets/Carlito-Regular.ttf");
+	mButtonOn = mGame->GetRenderer()->GetTexture("Assets/ButtonYellow.png");
+	mButtonOff = mGame->GetRenderer()->GetTexture("Assets/ButtonBlue.png");
+}
+
+UIScreen::UIScreen(Game* game, float x, float y)
+	:mGame(game)
+	, mTitle(nullptr)
+	, mBackground(nullptr)
+	, mTitlePos(x, y)
 	, mNextButtonPos(0.0f, 200.0f)
 	, mBGPos(0.0f, 250.0f)
 	, mState(EActive)
