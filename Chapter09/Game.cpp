@@ -329,13 +329,16 @@ void Game::LoadData()
 	}
 	*/
 
-	float rockCoordsX[] = { 400,1000,700,2000,2500,1800,3000, 4000, 600, 3400 };
-	float rockCoordsY[] = { 2000,400,1200,2700,100, 1700,2000, 4000, 10, 2000 };
+	float rockCoordsX[] = { 4000,10000,7000,2000,2500,1800,3000, 4000, 600, 3400, 7000, 9000,
+		10000, 2000, 4000, 2000, 3000, 11000, 7000, 12000,30000, 2000, 10000,4000 };
+	float rockCoordsY[] = { 2000,4000,1200,2700,1000, 1700,2000, 4000, 1000, 2000,5000,7000,
+		9000,6000,10000,11000,3000, 2000, 10000,4000, 6000, 3400, 7000 };
 	float rockCoordsZ = -100.0f;
-	float rockSizes[] = { 8.0f, 5.0f, 10.0f, 3.0f, 8.0f, 4.0f, 9.0f, 3.0f, 8.0f, 6.0f };
+	float rockSizes[] = { 8.0f, 15.0f, 10.0f, 15.0f, 8.0f, 14.0f, 9.0f, 13.0f, 8.0f, 6.0f, 
+		8.0f, 5.0f, 10.0f, 13.0f, 8.0f, 14.0f, 9.0f, 13.0f, 8.0f, 6.0f, 15.0f, 8.0f, 14.0f, 9.0f };
 
 	// Adding the obstacles
-	for (int i = 0; i < 10; ++i) {
+	for (int i = 0; i < 20; ++i) {
 		new SphereActor(this, rockCoordsX[i], rockCoordsY[i], rockCoordsZ, rockSizes[i]);
 	}
 
