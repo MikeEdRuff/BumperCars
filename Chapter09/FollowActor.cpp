@@ -95,6 +95,8 @@ void FollowActor::ActorInput(const uint8_t* keys)
 	{
 		if (mForwardSpeed > 0)
 			mForwardSpeed -= mAcceleration/2;
+		else if (mForwardSpeed < 0)
+			mForwardSpeed += mAcceleration / 2;
 	}
 
 	mMoveComp->SetForwardSpeed(mForwardSpeed);

@@ -24,7 +24,7 @@ Speedometer::~Speedometer()
 
 void Speedometer::CalcSpeed(FollowActor* car)
 {
-	int speed1 = std::int64_t(car->getForwardSpeed() / 26.5);
+	int speed1 = std::int64_t(Math::Abs(car->getForwardSpeed() / 26.5));
 	SetTitle(std::to_string(speed1));
 
 	
