@@ -28,10 +28,10 @@ public:
 	class Renderer* GetRenderer() { return mRenderer; }
 	class AudioSystem* GetAudioSystem() { return mAudioSystem; }
 	// Manage UI stack
-	const std::vector<class UIScreen*>& GetUIStack() { return mUIStack; }
-	void PushUI(class UIScreen* screen);
+	const std::vector<class UIScreen*>& GetUIStack() { return mUIStack; }		//Caleb Bellisle
+	void PushUI(class UIScreen* screen);		//Caleb Bellisle
 
-	enum GameState
+	enum GameState		//Caleb Bellisle
 	{
 		EStart,
 		EGameplay,
@@ -39,8 +39,8 @@ public:
 		EQuit
 	};
 
-	GameState GetState() const { return mGameState; }
-	void SetState(GameState state) { mGameState = state; }
+	GameState GetState() const { return mGameState; }		//Caleb Bellisle
+	void SetState(GameState state) { mGameState = state; }		//Caleb Bellisle
 
 	class Font* GetFont(const std::string& fileName);
 
@@ -62,7 +62,7 @@ private:
 
 	// All the actors in the game
 	std::vector<class Actor*> mActors;
-	std::vector<class UIScreen*> mUIStack;
+	std::vector<class UIScreen*> mUIStack;		//Caleb Bellisle
 	std::unordered_map<std::string, class Font*> mFonts;
 	// Map for text localization
 	std::unordered_map<std::string, std::string> mText;
@@ -78,7 +78,7 @@ private:
 
 
 	// Game-specific code
-	class Speedometer* mSpeedometer;
+	class Speedometer* mSpeedometer;		//Caleb Bellisle
 
 	class SkyBox* mySkyBox;
 	class AiCar* mAiCarOne;

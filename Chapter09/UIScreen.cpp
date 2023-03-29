@@ -5,6 +5,7 @@
 // Released under the BSD License
 // See LICENSE in root directory for full details.
 // ----------------------------------------------------------------
+//edited by caleb bellisle
 
 #include "UIScreen.h"
 #include "Texture.h"
@@ -29,7 +30,8 @@ UIScreen::UIScreen(Game* game)
 	mButtonOff = mGame->GetRenderer()->GetTexture("Assets/ButtonBlue.png");
 }
 
-UIScreen::UIScreen(Game* game, float x, float y)
+UIScreen::UIScreen(Game* game, float x, float y)//edited by caleb bellisle
+
 	:mGame(game)
 	, mTitle(nullptr)
 	, mBackground(nullptr)

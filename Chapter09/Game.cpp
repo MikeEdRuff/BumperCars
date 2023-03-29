@@ -21,17 +21,17 @@
 #include "FollowActor.h"
 #include "OrbitActor.h"
 #include "SplineActor.h"
-#include "UIScreen.h" //CB
-#include "Font.h"//CB
-#include "PauseMenu.h"//CB
-#include "StartMenu.h"//CB
+#include "UIScreen.h" //CB		//Caleb Bellisle
+#include "Font.h"//CB		//Caleb Bellisle
+#include "PauseMenu.h"//CB		//Caleb Bellisle
+#include "StartMenu.h"//CB		//Caleb Bellisle
 #include "SphereActor.h" // Jackson Wise
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 #include <fstream>
-#include <sstream>
-#include <rapidjson/document.h>
-#include "Speedometer.h"
+#include <sstream>		//Caleb Bellisle
+#include <rapidjson/document.h>		//Caleb Bellisle
+#include "Speedometer.h"		//Caleb Bellisle
 Game::Game()
 :mRenderer(nullptr)
 ,mAudioSystem(nullptr)
@@ -84,7 +84,7 @@ bool Game::Initialize()
 
 void Game::RunLoop()
 {
-	new StartMenu(this);
+	new StartMenu(this);		//Caleb Bellisle
 	while (mGameState != EQuit)
 	{
 
@@ -102,7 +102,7 @@ void Game::ProcessInput()
 		switch (event.type)
 		{
 		case SDL_QUIT:
-			mGameState = EQuit;
+			mGameState = EQuit;		//Caleb Bellisle
 			break;
 			// This fires when a key's initially pressed
 		case SDL_KEYDOWN:
@@ -164,7 +164,7 @@ void Game::HandleKeyPress(int key)
 	case SDLK_ESCAPE:
 		// Create pause menu
 		//new PauseMenu(this);
-		new PauseMenu(this);
+		new PauseMenu(this);		//Caleb Bellisle
 		break;
 	case '-':
 	{
@@ -213,7 +213,7 @@ void Game::UpdateGame()
 	mAiCarTwo->Update();	
 	mAiCarThree->Update();
 
-	float speed = mFollowActor->getForwardSpeed();
+	float speed = mFollowActor->getForwardSpeed();		//Caleb Bellisle
 
 	// Compute delta time
 	// Wait until 16ms has elapsed since last frame
@@ -264,7 +264,7 @@ void Game::UpdateGame()
 	}
 
 
-	// Update UI screens
+	// Update UI screens		//Caleb Bellisle
 	for (auto ui : mUIStack)
 	{
 		if (ui->GetState() == UIScreen::EActive)
@@ -272,7 +272,7 @@ void Game::UpdateGame()
 			ui->Update(deltaTime);
 		}
 	}
-	// Delete any UIScreens that are closed
+	// Delete any UIScreens that are closed		//Caleb Bellisle
 	auto iter = mUIStack.begin();
 	while (iter != mUIStack.end())
 	{
@@ -301,8 +301,8 @@ void Game::GenerateOutput()
 
 void Game::LoadData()
 {
-
-	LoadText("Assets/English.gptext");
+	
+	LoadText("Assets/English.gptext");		//Caleb Bellisle
 
 	// Create actors
 	Actor* a = new Actor(this);
