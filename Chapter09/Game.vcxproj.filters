@@ -121,6 +121,12 @@
     <ClCompile Include="Speedometer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Scoreboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h">
@@ -229,6 +235,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Speedometer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scoreboard.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WinMenu.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

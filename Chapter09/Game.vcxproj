@@ -35,6 +35,7 @@
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="PlaneActor.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="SoundEvent.cpp" />
@@ -48,6 +49,7 @@
     <ClCompile Include="UIScreen.cpp" />
     <ClCompile Include="VertexArray.cpp" />
     <ClCompile Include="WallActor.cpp" />
+    <ClCompile Include="WinMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
@@ -73,6 +75,7 @@
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="PlaneActor.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Scoreboard.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="skybox.h" />
     <ClInclude Include="SoundEvent.h" />
@@ -86,6 +89,7 @@
     <ClInclude Include="UIScreen.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="WallActor.h" />
+    <ClInclude Include="WinMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\BasicMesh.frag" />
