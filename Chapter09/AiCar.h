@@ -23,7 +23,8 @@ private:
 	class MeshComponent* mMeshComp;
 	const float mAcceleration = 20.0f;
 	float mForwardSpeed;
-	float mDeathTimer = 3.0f;
+	float mDeathTimer = 1.0f;
+	class Mesh* mExplosion;
 
 	// seed decides spawn location and movement of the car
 	int seed;

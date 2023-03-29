@@ -21,6 +21,8 @@ AiCar::AiCar(Game* game)
 
 	mMoveComp = new MoveComponent(this);
 	mMoveComp->SetForwardSpeed(2000);
+
+	mExplosion = game->GetRenderer()->GetMesh("Assets/Explosion.gpmesh");
 }
 
 void AiCar::AiCarMovement()
@@ -54,7 +56,7 @@ void AiCar::Update(float deltaTime) //Carl McAninch
 		mMoveComp->SetForwardSpeed(0);
 		mMoveComp->SetStrafeSpeed(0);
 
-		mMeshComp->SetMesh(GetGame()->GetRenderer()->GetMesh("Assets/Explosion.gpmesh"));
+		mMeshComp->SetMesh(mExplosion);
 		SetScale(20);
 
 		mDeathTimer -= deltaTime;
