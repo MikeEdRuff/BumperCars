@@ -36,7 +36,8 @@ public:
 		EStart,
 		EGameplay,
 		EPaused,
-		EQuit
+		EQuit,
+		EWin
 	};
 
 	GameState GetState() const { return mGameState; }		//Caleb Bellisle
@@ -48,6 +49,7 @@ public:
 	const std::string& GetText(const std::string& key);
 	class FollowActor& GetPlayerCar() { return *mFollowActor; }	//Carl McAninch
 	std::vector<class SphereActor*>& GetSpheres() { return mSphereActors; } //Jackson Wise
+	void AddPoint() { mScore++; }
 
 	void AddSphere(SphereActor* sphere); // Jackson Wise
 	
@@ -80,10 +82,10 @@ private:
 	// Game-specific code
 	class Speedometer* mSpeedometer;		//Caleb Bellisle
 
-	class SkyBox* mySkyBox;
-	class AiCar* mAiCarOne;
-	class AiCar* mAiCarTwo;
-	class AiCar* mAiCarThree;
+	class SkyBox* mySkyBox; // Michael Ruff
+	class AiCar* mAiCarOne; // Michael Ruff
+	class AiCar* mAiCarTwo; // Micheal Ruff
+	class AiCar* mAiCarThree; // Michael Ruff
 	class FollowActor* mFollowActor;
 	std::vector<class SphereActor*> mSphereActors; // Jackson Wise
 	class OrbitActor* mOrbitActor;
@@ -91,6 +93,9 @@ private:
 	class Actor* mStartSphere;
 	class Actor* mEndSphere;
 	class SpriteComponent* mCrosshair;
+	class Scoreboard* mScoreboard; //Jackson Wise
+	int mScore; //Jackson Wise
+	int numAiCars = 3; // Jackson Wise
 	SoundEvent mMusicEvent;
 	SoundEvent mReverbSnap;
 };

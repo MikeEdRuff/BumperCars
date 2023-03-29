@@ -25,6 +25,7 @@
 #include "Font.h"//CB		//Caleb Bellisle
 #include "PauseMenu.h"//CB		//Caleb Bellisle
 #include "StartMenu.h"//CB		//Caleb Bellisle
+#include "WinMenu.h" // Jackson Wise
 #include "SphereActor.h" // Jackson Wise
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
@@ -32,6 +33,7 @@
 #include <sstream>		//Caleb Bellisle
 #include <rapidjson/document.h>		//Caleb Bellisle
 #include "Speedometer.h"		//Caleb Bellisle
+#include "Scoreboard.h" // Jackson Wise
 Game::Game()
 :mRenderer(nullptr)
 ,mAudioSystem(nullptr)
@@ -87,7 +89,6 @@ void Game::RunLoop()
 	new StartMenu(this);		//Caleb Bellisle
 	while (mGameState != EQuit)
 	{
-
 		ProcessInput();
 		UpdateGame();
 		GenerateOutput();
@@ -111,6 +112,11 @@ void Game::ProcessInput()
 				if (mGameState == EGameplay)
 				{
 					HandleKeyPress(event.key.keysym.sym);
+				}
+				else if (mGameState == EWin)
+				{
+					HandleKeyPress(event.key.keysym.sym);
+					break;
 				}
 				else if (!mUIStack.empty())
 				{
@@ -166,6 +172,9 @@ void Game::HandleKeyPress(int key)
 		//new PauseMenu(this);
 		new PauseMenu(this);		//Caleb Bellisle
 		break;
+	case SDLK_q:
+		this->SetState(EQuit);
+		break;
 	case '-':
 	{
 		// Reduce master volume
@@ -182,21 +191,6 @@ void Game::HandleKeyPress(int key)
 		mAudioSystem->SetBusVolume("bus:/", volume);
 		break;
 	}
-	/*
-	case SDL_BUTTON_LEFT:
-	{
-		// Get start point (in center of screen on near plane)
-		Vector3 screenPoint(0.0f, 0.0f, 0.0f);
-		Vector3 start = mRenderer->Unproject(screenPoint);
-		// Get end point (in center of screen, between near and far)
-		screenPoint.z = 0.9f;
-		Vector3 end = mRenderer->Unproject(screenPoint);
-		// Set spheres to points
-		mStartSphere->SetPosition(start);
-		mEndSphere->SetPosition(end);
-		break;
-	}
-	*/
 	default:
 		break;
 	}
@@ -204,6 +198,7 @@ void Game::HandleKeyPress(int key)
 
 void Game::UpdateGame()
 {
+
 	// MER Make Car Move
 	mAiCarOne->AiCarMovement();
 	mAiCarTwo->AiCarMovement();
@@ -230,6 +225,7 @@ void Game::UpdateGame()
 	if (mGameState == EGameplay)
 	{
 		mSpeedometer->CalcSpeed(mFollowActor);
+		mScoreboard->SetScore(mScore); // Jackson Wise - setting the scoreboard to the score
 
 		// Update all actors
 		mUpdatingActors = true;
@@ -292,6 +288,9 @@ void Game::UpdateGame()
 	// Update Skybox
 	mySkyBox->SetPosition(mFollowActor->GetPosition());
 	
+	// Jackson Wise - Update if you won
+	if (mScore == numAiCars)
+		new WinMenu(this);
 }
 
 void Game::GenerateOutput()
@@ -404,12 +403,8 @@ void Game::LoadData()
 	}
 	mSpeedometer = new Speedometer(this);
 
-	/*a = new Actor(this);
-	a->SetPosition(Vector3(-390.0f, 275.0f, 0.0f));
-	a->SetScale(0.75f);
-	sc = new SpriteComponent(a);
-	sc->SetTexture(mRenderer->GetTexture("Assets/Radar.png"));
-	*/
+	// Jackson Wise - Making the scoreboard
+	mScoreboard = new Scoreboard(this);
 
 	// Start music
 	mMusicEvent = mAudioSystem->PlayEvent("event:/Music");

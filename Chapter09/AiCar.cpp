@@ -56,6 +56,14 @@ void AiCar::Update() //Carl McAninch
 
 		mMeshComp->SetMesh(GetGame()->GetRenderer()->GetMesh("Assets/Explosion.gpmesh"));
 		SetScale(20);
+
+		//Jackson Wise - Adding only one point if the target is destroyed
+		if (firstHit)
+		{
+			GetGame()->AddPoint();
+			firstHit = false;
+		}
+
 		//mMeshComp->SetVisible(false);
 	}
 }

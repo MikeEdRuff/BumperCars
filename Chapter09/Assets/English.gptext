@@ -8,6 +8,8 @@
 		"CancelButton": "Cancel",
 		"StartMenu": "Welcome to Bumper Cars!",
 		"Start": "Start",
+		"WinTitle": "You Win!!",
+		"EndGame": "Press Q",
 		 "0": "0 MP/h",
   "1": "1 MP/h",
   "2": "2 MP/h",
@@ -129,6 +131,10 @@
 		"118": "118 MP/h",
 		"119": "119 MP/h",
 		"120": "120 MP/h",
-		"MP/H": "MP/H"
+		"MP/H": "MP/H",
+		"0pts": "0 points",
+		"1pts": "1 point",
+		"2pts": "2 points",
+		"3pts": "3 points"
 	}
 }

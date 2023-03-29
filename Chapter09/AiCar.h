@@ -41,4 +41,5 @@ private:
 	int currentTarget = 0;
 
 	class CircleComponent* mCircle;	// Carl McANinch
+	bool firstHit = true; // Jackson Wise - Checking if the car has been hit
 };
