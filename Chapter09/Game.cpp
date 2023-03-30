@@ -86,13 +86,26 @@ bool Game::Initialize()
 
 void Game::RunLoop()
 {
+	static bool openMenu = false;
 	new StartMenu(this);		//Caleb Bellisle
 	while (mGameState != EQuit)
 	{
+
 		ProcessInput();
 		UpdateGame();
 		GenerateOutput();
+		if (mGameState == EWin && !openMenu)
+		{
+			new WinMenu(this);
+			openMenu = true;
+		}
+
+		
+
+
 	}
+	new WinMenu(this);
+
 }
 
 void Game::ProcessInput()
@@ -113,10 +126,10 @@ void Game::ProcessInput()
 				{
 					HandleKeyPress(event.key.keysym.sym);
 				}
-				else if (mGameState == EWin)
+			/*	else if (mGameState == EWin)
 				{
 					HandleKeyPress(event.key.keysym.sym);
-				}
+				}*/
 				else if (!mUIStack.empty())
 				{
 					mUIStack.back()->
@@ -208,6 +221,10 @@ void Game::UpdateGame()
 	mAiCarThree->Update();
 
 	float speed = mFollowActor->getForwardSpeed();		//Caleb Bellisle
+	// Jackson Wise - Update if you won
+	if (mScore == numAiCars)
+		mGameState = EWin;
+
 
 	// Compute delta time
 	// Wait until 16ms has elapsed since last frame
@@ -287,9 +304,7 @@ void Game::UpdateGame()
 	// Update Skybox
 	mySkyBox->SetPosition(mFollowActor->GetPosition());
 	
-	// Jackson Wise - Update if you won
-	if (mScore == numAiCars)
-		new WinMenu(this);
+
 }
 
 void Game::GenerateOutput()
@@ -406,7 +421,7 @@ void Game::LoadData()
 	mScoreboard = new Scoreboard(this);
 
 	// Start music
-	mMusicEvent = mAudioSystem->PlayEvent("event:/Music");
+	mMusicEvent = mAudioSystem->PlayEvent("event:/MenuMusic");
 
 	// Enable relative mouse mode for camera look
 	SDL_SetRelativeMouseMode(SDL_TRUE);

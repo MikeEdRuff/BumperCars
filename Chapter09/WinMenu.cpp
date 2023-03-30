@@ -11,11 +11,18 @@
 WinMenu::WinMenu(Game* game)
 	:UIScreen(game)
 {
-	mGame->SetState(Game::EWin);
+	mGame->SetState(Game::EPaused);
 	SetRelativeMouseMode(false);
 	SetTitle("WinTitle");
-	AddButton("EndGame", [this]() {
+	AddButton("WinTitle", [this]() {
+		mGame->SetState(Game::EGameplay);
 		Close();
+		});
+	AddButton("QuitButton", [this]() {
+		new DialogBox(mGame, "QuitText",
+		[this]() {
+				mGame->SetState(Game::EQuit);
+			});
 		});
 }
 
@@ -31,6 +38,6 @@ void WinMenu::HandleKeyPress(int key)
 
 	if (key == SDLK_ESCAPE)
 	{
-		mGame->SetState(Game::EQuit);
+		Close();
 	}
 }
