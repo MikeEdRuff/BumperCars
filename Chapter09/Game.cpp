@@ -15,7 +15,7 @@
 #include "MeshComponent.h"
 #include "WallActor.h"	// Jackson Wise
 #include "FloorActor.h"	// Jackson Wise
-#include "AiCar.h" //MER
+#include "AiCar.h" //Michael Ruff
 #include "SkyBox.h"
 #include "AudioComponent.h"
 #include "FollowActor.h"
@@ -210,15 +210,11 @@ void Game::HandleKeyPress(int key)
 
 void Game::UpdateGame()
 {
-
-	// MER Make Car Move
+	// Michael Ruff Make Car Move
 	mAiCarOne->AiCarMovement();
 	mAiCarTwo->AiCarMovement();
 	mAiCarThree->AiCarMovement();
 
-	mAiCarOne->Update();//Carl McAninch
-	mAiCarTwo->Update();	
-	mAiCarThree->Update();
 
 	float speed = mFollowActor->getForwardSpeed();		//Caleb Bellisle
 	// Jackson Wise - Update if you won
@@ -231,7 +227,13 @@ void Game::UpdateGame()
 	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16))
 		;
 
+
 	float deltaTime = (SDL_GetTicks() - mTicksCount) / 1000.0f;
+
+	mAiCarOne->Update(deltaTime);//Carl McAninch
+	mAiCarTwo->Update(deltaTime);
+	mAiCarThree->Update(deltaTime);
+
 	if (deltaTime > 0.05f)
 	{
 		deltaTime = 0.05f;
@@ -342,13 +344,16 @@ void Game::LoadData()
 	}
 	*/
 
-	float rockCoordsX[] = { 400,1000,700,2000,2500,1800,3000, 4000, 600, 3400 };
-	float rockCoordsY[] = { 2000,400,1200,2700,100, 1700,2000, 4000, 10, 2000 };
+	float rockCoordsX[] = { 4000,10000,7000,2000,2500,1800,3000, 4000, 600, 3400, 7000, 9000,
+		10000, 2000, 4000, 2000, 3000, 11000, 7000, 12000,30000, 2000, 10000,4000 };
+	float rockCoordsY[] = { 2000,4000,1200,2700,1000, 1700,2000, 4000, 1000, 2000,5000,7000,
+		9000,6000,10000,11000,3000, 2000, 10000,4000, 6000, 3400, 7000 };
 	float rockCoordsZ = -100.0f;
-	float rockSizes[] = { 8.0f, 5.0f, 10.0f, 3.0f, 8.0f, 4.0f, 9.0f, 3.0f, 8.0f, 6.0f };
+	float rockSizes[] = { 8.0f, 15.0f, 10.0f, 15.0f, 8.0f, 14.0f, 9.0f, 13.0f, 8.0f, 6.0f, 
+		8.0f, 5.0f, 10.0f, 13.0f, 8.0f, 14.0f, 9.0f, 13.0f, 8.0f, 6.0f, 15.0f, 8.0f, 14.0f, 9.0f };
 
 	// Adding the obstacles
-	for (int i = 0; i < 10; ++i) {
+	for (int i = 0; i < 20; ++i) {
 		new SphereActor(this, rockCoordsX[i], rockCoordsY[i], rockCoordsZ, rockSizes[i]);
 	}
 
@@ -433,7 +438,7 @@ void Game::LoadData()
 	mOrbitActor = new OrbitActor(this);
 	mSplineActor = new SplineActor(this);
 
-	// create aicar MER
+	// create aicar Michael Ruff
 	mAiCarOne = new AiCar(this);
 	mAiCarTwo = new AiCar(this);
 	mAiCarThree = new AiCar(this);
@@ -445,7 +450,7 @@ void Game::LoadData()
 	// create skybox
 	mySkyBox = new SkyBox(this);
 
-	// MER Set Camera 
+	// Michae Ruff Set Camera 
 	mFollowActor->SetState(Actor::EPaused);
 	mFollowActor->SetVisible(false);
 	mOrbitActor->SetState(Actor::EPaused);

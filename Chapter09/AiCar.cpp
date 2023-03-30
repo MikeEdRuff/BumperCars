@@ -1,5 +1,5 @@
 // Ai car cpp file
-// Michael Ruff (MER)
+// Michael Ruff 
 // Spring 2023
 
 #include "AiCar.h"
@@ -21,6 +21,8 @@ AiCar::AiCar(Game* game)
 
 	mMoveComp = new MoveComponent(this);
 	mMoveComp->SetForwardSpeed(2000);
+
+	mExplosion = game->GetRenderer()->GetMesh("Assets/Explosion.gpmesh");
 }
 
 void AiCar::AiCarMovement()
@@ -30,9 +32,9 @@ void AiCar::AiCarMovement()
 	float targetXtemp = targetX[seed][currentTarget];
 	float currentX = GetPosition().x;
 
-	if (currentY > targetYtemp - 100 && currentY <  targetYtemp + 100)
+	if (currentY > targetYtemp - 100 && currentY <  targetYtemp + 100 && currentX > targetXtemp - 100 && currentX < targetXtemp + 100)
 	{
-		if (currentTarget == 10)
+		if (currentTarget == 9)
 			currentTarget = 0;
 		else
 			currentTarget++;
@@ -45,7 +47,7 @@ void AiCar::AiCarMovement()
 	
 }
 
-void AiCar::Update() //Carl McAninch
+void AiCar::Update(float deltaTime) //Carl McAninch
 {
 	if (Intersect(*(GetGame()->GetPlayerCar().GetCircle()), *mCircle))
 	{
@@ -54,8 +56,15 @@ void AiCar::Update() //Carl McAninch
 		mMoveComp->SetForwardSpeed(0);
 		mMoveComp->SetStrafeSpeed(0);
 
-		mMeshComp->SetMesh(GetGame()->GetRenderer()->GetMesh("Assets/Explosion.gpmesh"));
+		mMeshComp->SetMesh(mExplosion);
 		SetScale(20);
+
+		mDeathTimer -= deltaTime;
+		if (mDeathTimer <= 0)
+		{
+			mMeshComp->SetVisible(false);
+		}
+
 
 		//Jackson Wise - Adding only one point if the target is destroyed
 		if (firstHit)

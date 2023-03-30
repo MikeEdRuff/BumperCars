@@ -24,9 +24,9 @@ private:
 	class MoveComponent* mMoveComp;
 	class FollowCamera* mCameraComp;
 	class MeshComponent* mMeshComp;
-	const float mAcceleration = 20.0f;
+	const float mAcceleration = 15.0f; // Jackson Wise - Acceleration speed
 	float mForwardSpeed;
-	float mBoostCooldown; // Cooldown to next boost
-	float mBoostDuration; // Duration of boost
+	float mBoostCooldown; // Jackson Wise - Cooldown to next boost
+	float mBoostDuration; // Jackson Wise - Duration of boost
 	class CircleComponent* mCircle;		//Carl McAninch
 };

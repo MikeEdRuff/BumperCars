@@ -41,17 +41,22 @@ void FollowActor::ActorInput(const uint8_t* keys)
 	float forwardSpeed = 0.0f;
 	float angularSpeed = 0.0f;
 
-	const float maxSpeed = 1600.0f;
-	const float maxBoost = 2400.0f;
+	// Jackson Wise - Different speed settings
+	const float slowAccel = 1600.0f;
+	const float maxSpeed = 2140.0f;
+	const float maxBoost = 2650.0f;
 
 	// wasd movement
 	if (keys[SDL_SCANCODE_W])
 	{
-		if (mForwardSpeed < maxSpeed)
+		// Jackson Wise - Setting up max speed
+		if (mForwardSpeed < slowAccel)
 			mForwardSpeed += mAcceleration;
+		else if (mForwardSpeed <= maxSpeed)
+			mForwardSpeed += mAcceleration / 10.0f;
 
-		//BOOOOOOST
-		if (keys[SDL_SCANCODE_SPACE] && mForwardSpeed < maxBoost && mBoostCooldown <= 0.0f)
+		// Jackson Wise - Boost
+		if (keys[SDL_SCANCODE_SPACE] && mForwardSpeed <= maxBoost && mBoostCooldown <= 0.0f)
 		{
 			// Jackson Wise - If there is boost to use
 			if (mBoostDuration > 0.0f)
@@ -66,13 +71,26 @@ void FollowActor::ActorInput(const uint8_t* keys)
 				mBoostCooldown = 2.0f; // JCW - Time until next boost (2 seconds)
 			}
 		}
+		else if (mForwardSpeed >= maxSpeed)
+		{
+			mForwardSpeed -= mAcceleration;
+		}
 	}
-	if (keys[SDL_SCANCODE_S])
+	else if (keys[SDL_SCANCODE_S])
 	{
 		// Jackson Wise
 		if (mForwardSpeed > -maxSpeed/2)
 			mForwardSpeed -= mAcceleration;
 	}
+	// Jackson Wise - Gradually slows down if nothing is being done
+	else 
+	{
+		if (mForwardSpeed > 0)
+			mForwardSpeed -= mAcceleration / 2;
+		else if (mForwardSpeed < 0)
+			mForwardSpeed += mAcceleration / 2;
+	}
+
 	if (keys[SDL_SCANCODE_A] && mForwardSpeed != 0.0f)
 	{
 		angularSpeed -= Math::Pi;
@@ -90,14 +108,6 @@ void FollowActor::ActorInput(const uint8_t* keys)
 			angularSpeed *= 1.5;
 	} 
 
-	// Jackson Wise - Gradually slows down if nothing is being done
-	else
-	{
-		if (mForwardSpeed > 0)
-			mForwardSpeed -= mAcceleration/2;
-		else if (mForwardSpeed < 0)
-			mForwardSpeed += mAcceleration / 2;
-	}
 
 	mMoveComp->SetForwardSpeed(mForwardSpeed);
 	mMoveComp->SetAngularSpeed(angularSpeed);
