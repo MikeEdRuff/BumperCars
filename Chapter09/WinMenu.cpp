@@ -14,8 +14,8 @@ WinMenu::WinMenu(Game* game)
 	mGame->SetState(Game::EWin);
 	SetRelativeMouseMode(false);
 	SetTitle("WinTitle");
-	AddButton("EndGame", [this]() {
-		Close();
+	AddButton("QuitButton", [this]() {
+		mGame->SetState(Game::EQuit);
 		});
 }
 

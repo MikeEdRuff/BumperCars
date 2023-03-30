@@ -42,7 +42,7 @@ void FollowActor::ActorInput(const uint8_t* keys)
 	float angularSpeed = 0.0f;
 
 	const float slowAccel = 1600.0f;
-	const float maxSpeed = 2120.0f;
+	const float maxSpeed = 2140.0f;
 	const float maxBoost = 2650.0f;
 
 	// wasd movement
@@ -51,11 +51,11 @@ void FollowActor::ActorInput(const uint8_t* keys)
 		// Jackson Wise - Setting up max speed
 		if (mForwardSpeed < slowAccel)
 			mForwardSpeed += mAcceleration;
-		else if (mForwardSpeed < maxSpeed)
+		else if (mForwardSpeed <= maxSpeed)
 			mForwardSpeed += mAcceleration / 10.0f;
 
 		// Jackson Wise - Boost
-		if (keys[SDL_SCANCODE_SPACE] && mForwardSpeed < maxBoost && mBoostCooldown <= 0.0f)
+		if (keys[SDL_SCANCODE_SPACE] && mForwardSpeed <= maxBoost && mBoostCooldown <= 0.0f)
 		{
 			// Jackson Wise - If there is boost to use
 			if (mBoostDuration > 0.0f)
