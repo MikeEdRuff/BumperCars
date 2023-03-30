@@ -41,6 +41,7 @@ void FollowActor::ActorInput(const uint8_t* keys)
 	float forwardSpeed = 0.0f;
 	float angularSpeed = 0.0f;
 
+	// Jackson Wise - Different speed settings
 	const float slowAccel = 1600.0f;
 	const float maxSpeed = 2140.0f;
 	const float maxBoost = 2650.0f;
