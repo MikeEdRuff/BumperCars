@@ -215,11 +215,17 @@ void Game::UpdateGame()
 	mAiCarTwo->AiCarMovement();
 	mAiCarThree->AiCarMovement();
 
+	//mMusicEvent = mAudioSystem->PlayEvent("event:/MenuMusic");
 
 	float speed = mFollowActor->getForwardSpeed();		//Caleb Bellisle
 	// Jackson Wise - Update if you won
 	if (mScore == numAiCars)
+	{
+		if(mMusicEvent.GetPaused())
+			mMusicEvent = mAudioSystem->PlayEvent("event:/MenuMusic");
 		mGameState = EWin;
+
+	}
 
 
 	// Compute delta time
@@ -242,6 +248,9 @@ void Game::UpdateGame()
 
 	if (mGameState == EGameplay)
 	{
+		//mAudioSystem->Shutdown();
+		//mMusicEvent.SetPaused(true);
+
 		mSpeedometer->CalcSpeed(mFollowActor);
 		mScoreboard->SetScore(mScore); // Jackson Wise - setting the scoreboard to the score
 
@@ -303,6 +312,7 @@ void Game::UpdateGame()
 	// Update audio system
 	mAudioSystem->Update(deltaTime);
 
+	//mAudioSystem->SetBusPaused("event:/MenuMusic", true);
 	// Update Skybox
 	mySkyBox->SetPosition(mFollowActor->GetPosition());
 	

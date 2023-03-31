@@ -7,13 +7,16 @@
 #include "Game.h"
 #include "DialogBox.h"
 #include <SDL/SDL.h>
-
+#include "AudioSystem.h"
 WinMenu::WinMenu(Game* game)
 	:UIScreen(game)
 {
 	mGame->SetState(Game::EPaused);
 	SetRelativeMouseMode(false);
 	SetTitle("WinTitle");
+
+	AudioSystem* mAudio = mGame->GetAudioSystem();
+	mAudio->PlayEvent("event:/MenuMusic");
 	AddButton("WinTitle", [this]() {
 		mGame->SetState(Game::EGameplay);
 		Close();

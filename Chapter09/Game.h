@@ -27,6 +27,7 @@ public:
 
 	class Renderer* GetRenderer() { return mRenderer; }
 	class AudioSystem* GetAudioSystem() { return mAudioSystem; }
+	void PauseAudio() { mMusicEvent.SetPaused(true); }
 	// Manage UI stack
 	const std::vector<class UIScreen*>& GetUIStack() { return mUIStack; }		//Caleb Bellisle
 	void PushUI(class UIScreen* screen);		//Caleb Bellisle
