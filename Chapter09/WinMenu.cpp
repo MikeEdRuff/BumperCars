@@ -19,12 +19,17 @@ WinMenu::WinMenu(Game* game)
 	mAudio->PlayEvent("event:/MenuMusic");
 	AddButton("WinTitle", [this]() {
 		mGame->SetState(Game::EGameplay);
-		Close();
+		mGame->Shutdown();
+		Game newGame;
+		newGame.Initialize();
+		newGame.RunLoop();//Caleb bellisle restarts the game by creating a new instance of the game;
+		//Close();
 		});
 	AddButton("QuitButton", [this]() {
 		new DialogBox(mGame, "QuitText",
 		[this]() {
 				mGame->SetState(Game::EQuit);
+				mGame->Shutdown();
 			});
 		});
 }

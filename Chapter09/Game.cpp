@@ -224,6 +224,7 @@ void Game::UpdateGame()
 		if(mMusicEvent.GetPaused())
 			mMusicEvent = mAudioSystem->PlayEvent("event:/MenuMusic");
 		mGameState = EWin;
+		
 
 	}
 
