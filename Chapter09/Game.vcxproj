@@ -20,7 +20,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="DialogBox.cpp" />
     <ClCompile Include="FloorActor.cpp" />
-    <ClCompile Include="FollowActor.cpp" />
+    <ClCompile Include="CarActor.cpp" />
     <ClCompile Include="FollowCamera.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FPSCamera.cpp" />
@@ -61,7 +61,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="DialogBox.h" />
     <ClInclude Include="FloorActor.h" />
-    <ClInclude Include="FollowActor.h" />
+    <ClInclude Include="CarActor.h" />
     <ClInclude Include="FollowCamera.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FPSCamera.h" />

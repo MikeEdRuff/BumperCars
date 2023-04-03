@@ -18,7 +18,7 @@
 #include "AiCar.h" //Michael Ruff
 #include "SkyBox.h"
 #include "AudioComponent.h"
-#include "FollowActor.h"
+#include "CarActor.h"
 #include "OrbitActor.h"
 #include "SplineActor.h"
 #include "UIScreen.h" //CB		//Caleb Bellisle
@@ -217,7 +217,7 @@ void Game::UpdateGame()
 
 	//mMusicEvent = mAudioSystem->PlayEvent("event:/MenuMusic");
 
-	float speed = mFollowActor->getForwardSpeed();		//Caleb Bellisle
+	float speed = mCarActor->getForwardSpeed();		//Caleb Bellisle
 	// Jackson Wise - Update if you won
 	if (mScore == numAiCars)
 	{
@@ -252,7 +252,7 @@ void Game::UpdateGame()
 		//mAudioSystem->Shutdown();
 		//mMusicEvent.SetPaused(true);
 
-		mSpeedometer->CalcSpeed(mFollowActor);
+		mSpeedometer->CalcSpeed(mCarActor);
 		mScoreboard->SetScore(mScore); // Jackson Wise - setting the scoreboard to the score
 
 		// Update all actors
@@ -315,7 +315,7 @@ void Game::UpdateGame()
 
 	//mAudioSystem->SetBusPaused("event:/MenuMusic", true);
 	// Update Skybox
-	mySkyBox->SetPosition(mFollowActor->GetPosition());
+	mySkyBox->SetPosition(mCarActor->GetPosition());
 	
 
 }
@@ -445,7 +445,7 @@ void Game::LoadData()
 	SDL_GetRelativeMouseState(nullptr, nullptr);
 
 	// Different camera actors
-	mFollowActor = new FollowActor(this);
+	mCarActor = new CarActor(this);
 	mOrbitActor = new OrbitActor(this);
 	mSplineActor = new SplineActor(this);
 
@@ -462,14 +462,14 @@ void Game::LoadData()
 	mySkyBox = new SkyBox(this);
 
 	// Michae Ruff Set Camera 
-	mFollowActor->SetState(Actor::EPaused);
-	mFollowActor->SetVisible(false);
+	mCarActor->SetState(Actor::EPaused);
+	mCarActor->SetVisible(false);
 	mOrbitActor->SetState(Actor::EPaused);
 	mOrbitActor->SetVisible(false);
 	mSplineActor->SetState(Actor::EPaused);
 
-	mFollowActor->SetState(Actor::EActive);
-	mFollowActor->SetVisible(true);
+	mCarActor->SetState(Actor::EActive);
+	mCarActor->SetVisible(true);
 
 
 

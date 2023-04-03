@@ -13,7 +13,7 @@
 #include <vector>
 #include "Math.h"
 #include "SoundEvent.h"
-#include "FollowActor.h"
+#include "CarActor.h"
 class Game
 {
 public:
@@ -48,7 +48,7 @@ public:
 
 	void LoadText(const std::string& fileName);
 	const std::string& GetText(const std::string& key);
-	class FollowActor& GetPlayerCar() { return *mFollowActor; }	//Carl McAninch
+	class CarActor& GetPlayerCar() { return *mCarActor; }	//Carl McAninch
 	std::vector<class SphereActor*>& GetSpheres() { return mSphereActors; } //Jackson Wise
 	void AddPoint() { mScore++; }
 
@@ -87,7 +87,7 @@ private:
 	class AiCar* mAiCarOne; // Michael Ruff
 	class AiCar* mAiCarTwo; // Micheal Ruff
 	class AiCar* mAiCarThree; // Michael Ruff
-	class FollowActor* mFollowActor;
+	class CarActor* mCarActor;
 	std::vector<class SphereActor*> mSphereActors; // Jackson Wise
 	class OrbitActor* mOrbitActor;
 	class SplineActor* mSplineActor;

@@ -17,7 +17,7 @@ WinMenu::WinMenu(Game* game)
 
 	AudioSystem* mAudio = mGame->GetAudioSystem();
 	mAudio->PlayEvent("event:/MenuMusic");
-	AddButton("WinTitle", [this]() {
+	AddButton("RestartButton", [this]() {
 		mGame->SetState(Game::EGameplay);
 		mGame->Shutdown();
 		Game newGame;

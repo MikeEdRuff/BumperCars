@@ -67,7 +67,7 @@
     <ClCompile Include="CameraComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FollowActor.cpp">
+    <ClCompile Include="CarActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FollowCamera.cpp">
@@ -183,7 +183,7 @@
     <ClInclude Include="CameraComponent.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="FollowActor.h">
+    <ClInclude Include="CarActor.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="FollowCamera.h">

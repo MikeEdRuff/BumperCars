@@ -9,10 +9,10 @@
 #pragma once
 #include "Actor.h"
 
-class FollowActor : public Actor
+class CarActor : public Actor
 {
 public:
-	FollowActor(class Game* game);
+	CarActor(class Game* game);
 
 	void ActorInput(const uint8_t* keys) override;
 

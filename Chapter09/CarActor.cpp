@@ -12,7 +12,7 @@
 // Added drift mechanics, boost mechanics, and more realistic car physics
 ////////////////////
 
-#include "FollowActor.h"
+#include "CarActor.h"
 #include "MeshComponent.h"
 #include "Game.h"
 #include "Renderer.h"
@@ -22,7 +22,7 @@
 #include "CircleComponent.h"
 #include "SphereActor.h"
 
-FollowActor::FollowActor(Game* game)
+CarActor::CarActor(Game* game)
 	:Actor(game)
 {
 	mMeshComp = new MeshComponent(this);
@@ -36,7 +36,7 @@ FollowActor::FollowActor(Game* game)
 	mCircle->SetRadius(100.0f);
 }
 
-void FollowActor::ActorInput(const uint8_t* keys)
+void CarActor::ActorInput(const uint8_t* keys)
 {
 	float forwardSpeed = 0.0f;
 	float angularSpeed = 0.0f;
@@ -125,7 +125,7 @@ void FollowActor::ActorInput(const uint8_t* keys)
 	
 }
 
-void FollowActor::UpdateActor(float deltaTime)
+void CarActor::UpdateActor(float deltaTime)
 {
 	// Jackson Wise - Updating boost duration and boost cooldown as time progresses
 	if (mBoostDuration <= 6.0f)
@@ -143,7 +143,7 @@ void FollowActor::UpdateActor(float deltaTime)
 
 }
 
-void FollowActor::SetVisible(bool visible)
+void CarActor::SetVisible(bool visible)
 {
 	mMeshComp->SetVisible(visible);
 }
