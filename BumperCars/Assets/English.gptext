@@ -2,6 +2,7 @@
 	"TextMap":{
 		"PauseTitle": "PAUSED",
 		"ResumeButton": "Resume",
+		"RestartButton": "Restart",
 		"QuitButton": "Quit",
 		"QuitText": "Do you want to quit?",
 		"OKButton": "OK",
