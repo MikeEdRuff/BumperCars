@@ -222,13 +222,11 @@ void Game::UpdateGame()
 	if (mScore == numAiCars)
 	{
 		mMusicEvent.SetPitch(1);
-		mMusicEvent.SetVolume(10);
-		
-		//mMusicEvent = mAudioSystem->PlayEvent("event:/Explosion");
-		if(mMusicEvent.GetPaused())
+
+		mMusicEvent.SetPaused(true);
+		if(mMusicEvent.GetPaused() && mScore == numAiCars)
 			mMusicEvent = mAudioSystem->PlayEvent("event:/WinEvent");
-
-
+		mScore++;
 		mGameState = EWin;
 		
 
@@ -236,33 +234,30 @@ void Game::UpdateGame()
 
 	//mMusicEvent = mAudioSystem->PlayEvent("event:/Idlesound");
 	//mMusicEvent.SetVolume(0.75);
-	if (mGameState != EWin)
-	{
-		if (speed == 0.0f && mGameState == EGameplay)	//IDLE CAR MUSIC/
-			if (mMusicEvent.GetPaused())
-				mMusicEvent = mAudioSystem->PlayEvent("event:/IdleSound");
+
+	if(speed == 0.0f && mGameState == EGameplay)	//IDLE CAR MUSIC/
+		if (mMusicEvent.GetPaused())
+			mMusicEvent = mAudioSystem->PlayEvent("event:/IdleSound");
 
 		//mMusicEvent.SetPaused(true);
-		if (speed >= 0.0001f && speed <= 2.5f)
-			mMusicEvent.SetPaused(true);
+	if(speed >= 0.0001f && speed <= 2.5f)
+		mMusicEvent.SetPaused(true);
 
-		if (abs(speed) > 2.5f)// we know we are moving less than 60
+	if (abs(speed) > 2.5f)// we know we are moving less than 60
+	{
+		mMusicEvent.SetVolume(1);
+
+		mMusicEvent.SetPitch(speed / 100 +1.3);
+		if (mMusicEvent.GetPaused())
 		{
-			mMusicEvent.SetVolume(1);
+			mMusicEvent = mAudioSystem->PlayEvent("event:/IdleSound");
+			mMusicEvent = mAudioSystem->PlayEvent("event:/Explosion");
 
-			mMusicEvent.SetPitch(speed / 100 + 1.3);
-			if (mMusicEvent.GetPaused())
-			{
-				mMusicEvent = mAudioSystem->PlayEvent("event:/IdleSound");
-				mMusicEvent = mAudioSystem->PlayEvent("event:/Explosion");
+			//mMusicEvent = mAudioSystem->PlayEvent("event:/40mph");
 
-				//mMusicEvent = mAudioSystem->PlayEvent("event:/40mph");
-
-			}
 		}
-
 	}
-	
+
 	
 	//if (abs(speed) >= 59.0f)
 	//{
@@ -302,15 +297,6 @@ void Game::UpdateGame()
 		deltaTime = 0.05f;
 	}
 	mTicksCount = SDL_GetTicks();
-	
-	static int tempScore = 0;
-	if (mScore > tempScore)
-	{
-		mMusicEvent = mAudioSystem->PlayEvent("event:/Explosion");
-		mMusicEvent.SetPaused(true);
-		tempScore = mScore;
-
-	}
 
 	if (mGameState == EGameplay)
 	{
@@ -320,15 +306,14 @@ void Game::UpdateGame()
 		mSpeedometer->CalcSpeed(mCarActor);
 		mScoreboard->SetScore(mScore); // Jackson Wise - setting the scoreboard to the score
 
-	/*	static int tempScore = 0;
+		static int tempScore = 0;
 		if (mScore > tempScore)
 		{
 			mMusicEvent = mAudioSystem->PlayEvent("event:/Explosion");
 			mMusicEvent.SetPaused(true);
-			tempScore = mScore;
+		}
 
-		}*/
-
+		tempScore = mScore;
 
 		
 
