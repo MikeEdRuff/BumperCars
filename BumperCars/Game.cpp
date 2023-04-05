@@ -217,16 +217,72 @@ void Game::UpdateGame()
 
 	//mMusicEvent = mAudioSystem->PlayEvent("event:/MenuMusic");
 
-	float speed = mCarActor->getForwardSpeed();		//Caleb Bellisle
+	float speed = mCarActor->getForwardSpeed()/ 26.5;		//Caleb Bellisle
 	// Jackson Wise - Update if you won
 	if (mScore == numAiCars)
 	{
+		mMusicEvent.SetPitch(1);
+		mMusicEvent.SetVolume(10);
+		
+		//mMusicEvent = mAudioSystem->PlayEvent("event:/Explosion");
 		if(mMusicEvent.GetPaused())
-			mMusicEvent = mAudioSystem->PlayEvent("event:/MenuMusic");
+			mMusicEvent = mAudioSystem->PlayEvent("event:/WinEvent");
+
+
 		mGameState = EWin;
 		
 
 	}
+
+	//mMusicEvent = mAudioSystem->PlayEvent("event:/Idlesound");
+	//mMusicEvent.SetVolume(0.75);
+	if (mGameState != EWin)
+	{
+		if (speed == 0.0f && mGameState == EGameplay)	//IDLE CAR MUSIC/
+			if (mMusicEvent.GetPaused())
+				mMusicEvent = mAudioSystem->PlayEvent("event:/IdleSound");
+
+		//mMusicEvent.SetPaused(true);
+		if (speed >= 0.0001f && speed <= 2.5f)
+			mMusicEvent.SetPaused(true);
+
+		if (abs(speed) > 2.5f)// we know we are moving less than 60
+		{
+			mMusicEvent.SetVolume(1);
+
+			mMusicEvent.SetPitch(speed / 100 + 1.3);
+			if (mMusicEvent.GetPaused())
+			{
+				mMusicEvent = mAudioSystem->PlayEvent("event:/IdleSound");
+				mMusicEvent = mAudioSystem->PlayEvent("event:/Explosion");
+
+				//mMusicEvent = mAudioSystem->PlayEvent("event:/40mph");
+
+			}
+		}
+
+	}
+	
+	
+	//if (abs(speed) >= 59.0f)
+	//{
+
+	//	//mMusicEvent.SetPaused(true);
+	//	
+	//	
+	//}
+	//if(abs(speed) > 61.0f)
+	//{
+	//	if (mMusicEvent.GetPaused())
+	//	{
+	//		//mMusicEvent = mAudioSystem->PlayEvent("event:/IdleSound");
+
+	//		//mMusicEvent = mAudioSystem->PlayEvent("event:/Idlesound");
+
+	//	}
+	//}
+
+
 
 
 	// Compute delta time
@@ -246,6 +302,15 @@ void Game::UpdateGame()
 		deltaTime = 0.05f;
 	}
 	mTicksCount = SDL_GetTicks();
+	
+	static int tempScore = 0;
+	if (mScore > tempScore)
+	{
+		mMusicEvent = mAudioSystem->PlayEvent("event:/Explosion");
+		mMusicEvent.SetPaused(true);
+		tempScore = mScore;
+
+	}
 
 	if (mGameState == EGameplay)
 	{
@@ -254,6 +319,19 @@ void Game::UpdateGame()
 
 		mSpeedometer->CalcSpeed(mCarActor);
 		mScoreboard->SetScore(mScore); // Jackson Wise - setting the scoreboard to the score
+
+	/*	static int tempScore = 0;
+		if (mScore > tempScore)
+		{
+			mMusicEvent = mAudioSystem->PlayEvent("event:/Explosion");
+			mMusicEvent.SetPaused(true);
+			tempScore = mScore;
+
+		}*/
+
+
+		
+
 
 		// Update all actors
 		mUpdatingActors = true;
@@ -437,7 +515,7 @@ void Game::LoadData()
 	mScoreboard = new Scoreboard(this);
 
 	// Start music
-	mMusicEvent = mAudioSystem->PlayEvent("event:/MenuMusic");
+	mMusicEvent = mAudioSystem->PlayEvent("event:/StartMusic");
 
 	// Enable relative mouse mode for camera look
 	SDL_SetRelativeMouseMode(SDL_TRUE);

@@ -31,6 +31,8 @@ StartMenu::StartMenu(Game* game)
 				mGame->SetState(Game::EQuit);
 			});
 		});
+	//new DialogBox(mGame, "Instructions", [this]() {});
+
 }
 
 StartMenu::~StartMenu()

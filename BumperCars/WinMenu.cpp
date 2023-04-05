@@ -32,6 +32,7 @@ WinMenu::WinMenu(Game* game)
 				mGame->Shutdown();
 			});
 		});
+	
 }
 
 WinMenu::~WinMenu()
