@@ -143,7 +143,72 @@ void CarActor::UpdateActor(float deltaTime)
 	{
 		if (Intersect(*mCircle, *sphere->GetCircle()))
 		{
-			mForwardSpeed = 0.0f;
+			Vector3 spherePos = sphere->GetPosition();
+			Vector3 carPos = GetPosition();
+
+
+			if (Math::Abs(spherePos.x) - Math::Abs(carPos.x) < 10 &&
+				Math::Abs(spherePos.y) - Math::Abs(carPos.y) < 10)
+			{
+				if (Math::Abs(spherePos.x) - Math::Abs(carPos.x) < Math::Abs(spherePos.y) - Math::Abs(carPos.y)) {
+					if (previousLocation.x - carPos.x < carPos.x)
+					{
+						carPos.x += sphere->GetCircle()->GetRadius();
+						mForwardSpeed = 20;
+					}
+					else
+					{
+						carPos.x -= sphere->GetCircle()->GetRadius();
+						mForwardSpeed = 20;
+					}
+				}
+				else {
+					if (previousLocation.y - carPos.y < carPos.y)
+					{
+						carPos.y += sphere->GetCircle()->GetRadius();
+						mForwardSpeed = 20;
+					}
+					else
+					{
+						carPos.y += sphere->GetCircle()->GetRadius();
+						mForwardSpeed = 20;
+					}
+
+				}
+
+			}
+			else if (Math::Abs(spherePos.y) - Math::Abs(carPos.y) < 10 &&
+				Math::Abs(spherePos.x) - Math::Abs(carPos.x) > 10)
+			{
+
+				if (previousLocation.y - carPos.y < carPos.y)
+				{
+					carPos.y += sphere->GetCircle()->GetRadius();
+					mForwardSpeed = 20;
+				}
+				else
+				{
+					carPos.y += sphere->GetCircle()->GetRadius();
+					mForwardSpeed = 20;
+				}
+			}
+			else if (Math::Abs(spherePos.y) - Math::Abs(carPos.y) > 10 &&
+				Math::Abs(spherePos.x) - Math::Abs(carPos.x) < 10)
+			{
+				if (previousLocation.x - carPos.x < carPos.x)
+				{
+					carPos.x += sphere->GetCircle()->GetRadius();
+					mForwardSpeed = 20;
+				}
+				else
+				{
+					carPos.x -= sphere->GetCircle()->GetRadius();
+					mForwardSpeed = 20;
+				}
+
+			}
+			SetPosition(carPos);
+			//mForwardSpeed = 0.0f;
 		}
 	}
 

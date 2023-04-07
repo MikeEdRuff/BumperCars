@@ -29,4 +29,5 @@ private:
 	float mBoostCooldown; // Jackson Wise - Cooldown to next boost
 	float mBoostDuration; // Jackson Wise - Duration of boost
 	class CircleComponent* mCircle;		//Carl McAninch
+	Vector3 previousLocation;
 };
