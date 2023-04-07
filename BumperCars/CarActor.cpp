@@ -97,7 +97,10 @@ void CarActor::ActorInput(const uint8_t* keys)
 
 		// Jackson Wise - Drift Mechanics
 		if (keys[SDL_SCANCODE_LSHIFT])
+		{
 			angularSpeed *= 1.5;
+			mForwardSpeed -= mAcceleration;
+		}
 	}
 	if (keys[SDL_SCANCODE_D] && mForwardSpeed != 0.0f)
 	{
@@ -105,7 +108,10 @@ void CarActor::ActorInput(const uint8_t* keys)
 
 		// Jackson Wise - Drift Mechanics
 		if (keys[SDL_SCANCODE_LSHIFT])
+		{
 			angularSpeed *= 1.5;
+			mForwardSpeed -= mAcceleration;
+		}
 	} 
 
 
