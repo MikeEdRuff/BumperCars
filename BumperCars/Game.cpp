@@ -34,6 +34,8 @@
 #include <rapidjson/document.h>		//Caleb Bellisle
 #include "Speedometer.h"		//Caleb Bellisle
 #include "Scoreboard.h" // Jackson Wise
+#include "Timer.h"
+
 Game::Game()
 :mRenderer(nullptr)
 ,mAudioSystem(nullptr)
@@ -305,6 +307,7 @@ void Game::UpdateGame()
 
 		mSpeedometer->CalcSpeed(mCarActor);
 		mScoreboard->SetScore(mScore); // Jackson Wise - setting the scoreboard to the score
+		mTimer->CalcTime(deltaTime);
 
 		static int tempScore = 0;
 		if (mScore > tempScore)
@@ -498,6 +501,9 @@ void Game::LoadData()
 
 	// Jackson Wise - Making the scoreboard
 	mScoreboard = new Scoreboard(this);
+
+	// Jackson Wise - Making the timer
+	mTimer = new Timer(this);
 
 	// Start music
 	mMusicEvent = mAudioSystem->PlayEvent("event:/StartMusic");

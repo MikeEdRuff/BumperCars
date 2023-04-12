@@ -26,6 +26,4 @@ void Speedometer::CalcSpeed(CarActor* car)
 {
 	int speed1 = std::int64_t(Math::Abs(car->getForwardSpeed() / 26.5));
 	SetTitle(std::to_string(speed1));
-
-	
 }

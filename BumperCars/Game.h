@@ -95,6 +95,7 @@ private:
 	class Actor* mEndSphere;
 	class SpriteComponent* mCrosshair;
 	class Scoreboard* mScoreboard; //Jackson Wise
+	class Timer* mTimer;	// Jackson Wise
 	int mScore; //Jackson Wise
 	int numAiCars = 3; // Jackson Wise
 	SoundEvent mMusicEvent;
