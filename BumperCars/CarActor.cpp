@@ -143,15 +143,14 @@ void CarActor::UpdateActor(float deltaTime)
 	{
 		if (Intersect(*mCircle, *sphere->GetCircle()))
 		{
-			//mForwardSpeed = 0.0f;
-			//float targetXtemp = sphere->GetPosition().x,
-			//	targetYtemp = sphere->GetPosition().y;
-			//float currentX = GetPosition().x,
-			//	currentY = GetPosition().y;
-			//float angle = Math::Atan2(-(targetYtemp - currentY), -(targetXtemp - currentX));
-			//Quaternion q(Vector3::UnitZ, angle);
-			////SetRotation(q);
-			mForwardSpeed = -1000;
+			if (mForwardSpeed > 0)
+			{
+				mForwardSpeed = -1000;
+			}
+			else
+			{
+				mForwardSpeed = 1000;
+			}
 		}
 	}
 
