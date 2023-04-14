@@ -143,72 +143,15 @@ void CarActor::UpdateActor(float deltaTime)
 	{
 		if (Intersect(*mCircle, *sphere->GetCircle()))
 		{
-			Vector3 spherePos = sphere->GetPosition();
-			Vector3 carPos = GetPosition();
-
-
-			if (Math::Abs(spherePos.x) - Math::Abs(carPos.x) < 10 &&
-				Math::Abs(spherePos.y) - Math::Abs(carPos.y) < 10)
-			{
-				if (Math::Abs(spherePos.x) - Math::Abs(carPos.x) < Math::Abs(spherePos.y) - Math::Abs(carPos.y)) {
-					if (previousLocation.x - carPos.x < carPos.x)
-					{
-						carPos.x += sphere->GetCircle()->GetRadius();
-						mForwardSpeed = 20;
-					}
-					else
-					{
-						carPos.x -= sphere->GetCircle()->GetRadius();
-						mForwardSpeed = 20;
-					}
-				}
-				else {
-					if (previousLocation.y - carPos.y < carPos.y)
-					{
-						carPos.y += sphere->GetCircle()->GetRadius();
-						mForwardSpeed = 20;
-					}
-					else
-					{
-						carPos.y += sphere->GetCircle()->GetRadius();
-						mForwardSpeed = 20;
-					}
-
-				}
-
-			}
-			else if (Math::Abs(spherePos.y) - Math::Abs(carPos.y) < 10 &&
-				Math::Abs(spherePos.x) - Math::Abs(carPos.x) > 10)
-			{
-
-				if (previousLocation.y - carPos.y < carPos.y)
-				{
-					carPos.y += sphere->GetCircle()->GetRadius();
-					mForwardSpeed = 20;
-				}
-				else
-				{
-					carPos.y += sphere->GetCircle()->GetRadius();
-					mForwardSpeed = 20;
-				}
-			}
-			else if (Math::Abs(spherePos.y) - Math::Abs(carPos.y) > 10 &&
-				Math::Abs(spherePos.x) - Math::Abs(carPos.x) < 10)
-			{
-				if (previousLocation.x - carPos.x < carPos.x)
-				{
-					carPos.x += sphere->GetCircle()->GetRadius();
-					mForwardSpeed = 20;
-				}
-				else
-				{
-					carPos.x -= sphere->GetCircle()->GetRadius();
-					mForwardSpeed = 20;
-				}
-
-			}
-			SetPosition(carPos);
 			//mForwardSpeed = 0.0f;
+			float targetXtemp = sphere->GetPosition().x,
+				targetYtemp = sphere->GetPosition().y;
+			float currentX = GetPosition().x,
+				currentY = GetPosition().y;
+			float angle = Math::Atan2(-(targetYtemp - currentY), -(targetXtemp - currentX));
+			Quaternion q(Vector3::UnitZ, angle);
+			SetRotation(q);
+			mForwardSpeed = 30;
 		}
 	}
 
