@@ -35,6 +35,9 @@
 #include "Speedometer.h"		//Caleb Bellisle
 #include "Scoreboard.h" // Jackson Wise
 #include "Timer.h"
+using namespace std;
+#include <iostream>
+#include <fstream>
 
 Game::Game()
 :mRenderer(nullptr)
@@ -230,8 +233,30 @@ void Game::UpdateGame()
 			mMusicEvent = mAudioSystem->PlayEvent("event:/WinEvent");
 		mScore++;
 		mGameState = EWin;
-		
 
+		//ifstream file;
+		//file.open("leaderboard.txt");
+
+		//fstream f;
+		ofstream fout;
+		ifstream fin;
+		fin.open("leaderboard.txt");
+		fout.open("leaderboard.txt", ios::app);
+
+
+		if (fin.is_open()) 
+		{
+			fout << mTimer->GetTime() << endl;
+			fin.close();
+			fout.close();
+		}
+		else 
+		{
+			ofstream MyFile("leaderboard.txt");
+			MyFile << mTimer->GetTime() << endl;
+			MyFile.close();
+		}
+		
 	}
 
 	//mMusicEvent = mAudioSystem->PlayEvent("event:/Idlesound");
