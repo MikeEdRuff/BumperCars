@@ -28,6 +28,7 @@ CarActor::CarActor(Game* game)
 	mMeshComp = new MeshComponent(this);
 	mMeshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/playerCar.gpmesh"));
 	SetPosition(Vector3(0.0f, 0.0f, -100.0f));
+	this->SetScale(0.5f); // Offsetting scale
 	
 	mMoveComp = new MoveComponent(this);
 	mCameraComp = new FollowCamera(this);

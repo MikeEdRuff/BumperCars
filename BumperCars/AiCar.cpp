@@ -15,6 +15,7 @@ AiCar::AiCar(Game* game)
 	mMeshComp = new MeshComponent(this);
 	mMeshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/aiCar.gpmesh"));
 	SetPosition(Vector3(0,0,0));
+	this->SetScale(0.5);
 
 	mCircle = new CircleComponent(this);	//carl Mcaninch
 	mCircle->SetRadius(100.0f);

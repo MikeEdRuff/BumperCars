@@ -104,10 +104,6 @@ void Game::RunLoop()
 			new WinMenu(this);
 			openMenu = true;
 		}
-
-		
-
-
 	}
 	new WinMenu(this);
 
@@ -285,26 +281,6 @@ void Game::UpdateGame()
 		}
 	}
 
-	
-	//if (abs(speed) >= 59.0f)
-	//{
-
-	//	//mMusicEvent.SetPaused(true);
-	//	
-	//	
-	//}
-	//if(abs(speed) > 61.0f)
-	//{
-	//	if (mMusicEvent.GetPaused())
-	//	{
-	//		//mMusicEvent = mAudioSystem->PlayEvent("event:/IdleSound");
-
-	//		//mMusicEvent = mAudioSystem->PlayEvent("event:/Idlesound");
-
-	//	}
-	//}
-
-
 
 
 	// Compute delta time
@@ -418,7 +394,8 @@ void Game::GenerateOutput()
 
 void Game::LoadData()
 {
-	
+	const float offset = 2.0f;
+
 	LoadText("Assets/English.gptext");		//Caleb Bellisle
 
 	// Loads obstacles into game			//Julian Powell
@@ -436,16 +413,6 @@ void Game::LoadData()
 	float boxCoordsZ = -50.0f;
 	float boxSizes[] = { 200.0f, 300.0f, 250.0f, 300.0f, 180.0f, 200.0f, 150.0f, 300.0f, 280.0f, 160.0f };
 
-	/*
-	for (int i = 0; i < 10; ++i) {
-		a = new SphereActor(this);
-		a->SetPosition(Vector3(boxCoordsX[i], boxCoordsY[i], boxCoordsZ));
-		a->SetScale(boxSizes[i]);
-		mc = new MeshComponent(a);
-		mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
-	}
-	*/
-
 	float rockCoordsX[] = { 4000,10000,7000,2000,2500,1800,3000, 4000, 600, 3400, 7000, 9000,
 		10000, 2000, 4000, 2000, 3000, 11000, 7000, 12000,30000, 2000, 10000,4000 };
 	float rockCoordsY[] = { 2000,4000,1200,2700,1000, 1700,2000, 4000, 1000, 2000,5000,7000,
@@ -456,12 +423,12 @@ void Game::LoadData()
 
 	// Adding the obstacles
 	for (int i = 0; i < 20; ++i) {
-		new SphereActor(this, rockCoordsX[i], rockCoordsY[i], rockCoordsZ, rockSizes[i]);
+		new SphereActor(this, rockCoordsX[i]/offset, rockCoordsY[i]/offset, rockCoordsZ, rockSizes[i]/offset);
 	}
 
 	// Setup floor
-	float start = -1250.0f;
-	float size = 500.0f;
+	float start = -1250.0f/offset;
+	float size = 500.0f/offset;
 	const int ySize = 25;
 	const int xSize = 25;
 
@@ -509,7 +476,7 @@ void Game::LoadData()
 	dir.mDiffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.mSpecColor = Vector3(0.8f, 0.8f, 0.8f);
 
-	// UI elements CAleb bellisle
+	// UI elements Caleb bellisle
 	static bool firstrun = false;
 
 	if (firstrun)
@@ -520,7 +487,6 @@ void Game::LoadData()
 		SpriteComponent* sc = new SpriteComponent(a);
 		//sc->SetTexture(mRenderer->GetTexture("Assets/HealthBar.png"));
 		firstrun = true;
-
 	}
 	mSpeedometer = new Speedometer(this);
 

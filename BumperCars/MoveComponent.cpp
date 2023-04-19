@@ -40,10 +40,10 @@ void MoveComponent::Update(float deltaTime)
 	}
 
 
+	const float offset = 2.0f;
 
-
-	float start = -1250.0f;
-	float size = 500.0f;
+	float start = -1250.0f/offset;
+	float size = 500.0f/offset;
 	const int ySize = 25;
 	const int xSize = 25;
 	int roomSize = size * 19;
