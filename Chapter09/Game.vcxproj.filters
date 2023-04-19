@@ -127,6 +127,12 @@
     <ClCompile Include="WinMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Radar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AiCarComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h">
@@ -243,6 +249,8 @@
     <ClInclude Include="WinMenu.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Radar.h" />
+    <ClInclude Include="AiCarComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Sprite.frag">

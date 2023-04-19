@@ -48,6 +48,7 @@ public:
 	void LoadText(const std::string& fileName);
 	const std::string& GetText(const std::string& key);
 	class FollowActor& GetPlayerCar() { return *mFollowActor; }	//Carl McAninch
+	std::vector<class AiCar*>& GetAiCars() { return mAiCars; }	//Julian Powell
 	std::vector<class SphereActor*>& GetSpheres() { return mSphereActors; } //Jackson Wise
 	void AddPoint() { mScore++; }
 
@@ -88,12 +89,14 @@ private:
 	class AiCar* mAiCarThree; // Michael Ruff
 	class FollowActor* mFollowActor;
 	std::vector<class SphereActor*> mSphereActors; // Jackson Wise
+	std::vector<class AiCar*> mAiCars;//Julian Powell
 	class OrbitActor* mOrbitActor;
 	class SplineActor* mSplineActor;
 	class Actor* mStartSphere;
 	class Actor* mEndSphere;
 	class SpriteComponent* mCrosshair;
 	class Scoreboard* mScoreboard; //Jackson Wise
+	class Radar* mRadar;	//Julian Powell
 	int mScore; //Jackson Wise
 	int numAiCars = 3; // Jackson Wise
 	SoundEvent mMusicEvent;

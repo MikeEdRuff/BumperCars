@@ -34,6 +34,7 @@
 #include <rapidjson/document.h>		//Caleb Bellisle
 #include "Speedometer.h"		//Caleb Bellisle
 #include "Scoreboard.h" // Jackson Wise
+#include "Radar.h" //Julian Powell
 Game::Game()
 :mRenderer(nullptr)
 ,mAudioSystem(nullptr)
@@ -303,6 +304,8 @@ void Game::LoadData()
 {
 	
 	LoadText("Assets/English.gptext");		//Caleb Bellisle
+
+	mRadar = new Radar(this);				//Julian Powell
 
 	// Loads obstacles into game			//Julian Powell
 	Actor* a = new Actor(this);		
