@@ -12,7 +12,7 @@
 // Added drift mechanics, boost mechanics, and more realistic car physics
 ////////////////////
 
-#include "CarActor.h"
+#include "FollowActor.h"
 #include "MeshComponent.h"
 #include "Game.h"
 #include "Renderer.h"
@@ -22,7 +22,7 @@
 #include "CircleComponent.h"
 #include "SphereActor.h"
 
-CarActor::CarActor(Game* game)
+FollowActor::FollowActor(Game* game)
 	:Actor(game)
 {
 	mMeshComp = new MeshComponent(this);
@@ -36,14 +36,13 @@ CarActor::CarActor(Game* game)
 	mCircle->SetRadius(100.0f);
 }
 
-void CarActor::ActorInput(const uint8_t* keys)
+void FollowActor::ActorInput(const uint8_t* keys)
 {
 	float forwardSpeed = 0.0f;
 	float angularSpeed = 0.0f;
 
-	// Jackson Wise - Different speed settings
 	const float slowAccel = 1600.0f;
-	const float maxSpeed = 2140.0f;
+	const float maxSpeed = 2120.0f;
 	const float maxBoost = 2650.0f;
 
 	// wasd movement
@@ -52,11 +51,11 @@ void CarActor::ActorInput(const uint8_t* keys)
 		// Jackson Wise - Setting up max speed
 		if (mForwardSpeed < slowAccel)
 			mForwardSpeed += mAcceleration;
-		else if (mForwardSpeed <= maxSpeed)
+		else if (mForwardSpeed < maxSpeed)
 			mForwardSpeed += mAcceleration / 10.0f;
 
 		// Jackson Wise - Boost
-		if (keys[SDL_SCANCODE_SPACE] && mForwardSpeed <= maxBoost && mBoostCooldown <= 0.0f)
+		if (keys[SDL_SCANCODE_SPACE] && mForwardSpeed < maxBoost && mBoostCooldown <= 0.0f)
 		{
 			// Jackson Wise - If there is boost to use
 			if (mBoostDuration > 0.0f)
@@ -97,10 +96,7 @@ void CarActor::ActorInput(const uint8_t* keys)
 
 		// Jackson Wise - Drift Mechanics
 		if (keys[SDL_SCANCODE_LSHIFT])
-		{
 			angularSpeed *= 1.5;
-			mForwardSpeed -= mAcceleration;
-		}
 	}
 	if (keys[SDL_SCANCODE_D] && mForwardSpeed != 0.0f)
 	{
@@ -108,10 +104,7 @@ void CarActor::ActorInput(const uint8_t* keys)
 
 		// Jackson Wise - Drift Mechanics
 		if (keys[SDL_SCANCODE_LSHIFT])
-		{
 			angularSpeed *= 1.5;
-			mForwardSpeed -= mAcceleration;
-		}
 	} 
 
 
@@ -131,7 +124,7 @@ void CarActor::ActorInput(const uint8_t* keys)
 	
 }
 
-void CarActor::UpdateActor(float deltaTime)
+void FollowActor::UpdateActor(float deltaTime)
 {
 	// Jackson Wise - Updating boost duration and boost cooldown as time progresses
 	if (mBoostDuration <= 6.0f)
@@ -143,20 +136,13 @@ void CarActor::UpdateActor(float deltaTime)
 	{
 		if (Intersect(*mCircle, *sphere->GetCircle()))
 		{
-			if (mForwardSpeed > 0)
-			{
-				mForwardSpeed = -1000;
-			}
-			else
-			{
-				mForwardSpeed = 1000;
-			}
+			mForwardSpeed = 0.0f;
 		}
 	}
 
 }
 
-void CarActor::SetVisible(bool visible)
+void FollowActor::SetVisible(bool visible)
 {
 	mMeshComp->SetVisible(visible);
 }

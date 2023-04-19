@@ -3,7 +3,7 @@
 
 #pragma once
 #include "UIScreen.h"
-#include "CarActor.h"
+#include "FollowActor.h"
 class Speedometer : public UIScreen
 {
 public:
@@ -11,7 +11,7 @@ public:
 	~Speedometer();
 
 	
-	void CalcSpeed(CarActor* car);
+	void CalcSpeed(FollowActor* car);
 
 private:
 	//std::unordered_map<std::string, std::string> mText;

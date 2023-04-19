@@ -1,5 +1,5 @@
 // Ai car cpp file
-// Michael Ruff 
+// Michael Ruff (MER)
 // Spring 2023
 
 #include "AiCar.h"
@@ -32,9 +32,9 @@ void AiCar::AiCarMovement()
 	float targetXtemp = targetX[seed][currentTarget];
 	float currentX = GetPosition().x;
 
-	if (currentY > targetYtemp - 100 && currentY <  targetYtemp + 100 && currentX > targetXtemp - 100 && currentX < targetXtemp + 100)
+	if (currentY > targetYtemp - 100 && currentY <  targetYtemp + 100)
 	{
-		if (currentTarget == 9)
+		if (currentTarget == 10)
 			currentTarget = 0;
 		else
 			currentTarget++;

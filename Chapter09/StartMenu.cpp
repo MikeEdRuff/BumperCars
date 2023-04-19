@@ -11,7 +11,6 @@
 #include "Game.h"
 #include "DialogBox.h"
 #include <SDL/SDL.h>
-#include "AudioSystem.h"
 
 StartMenu::StartMenu(Game* game)
 	:UIScreen(game)
@@ -21,8 +20,6 @@ StartMenu::StartMenu(Game* game)
 	SetTitle("StartMenu");
 	AddButton("Start", [this]() {
 		mGame->SetState(Game::EGameplay);
-		//mGame->PauseAudio();
-		mGame->PauseAudio();
 		Close();
 		});
 	AddButton("QuitButton", [this]() {
@@ -31,8 +28,6 @@ StartMenu::StartMenu(Game* game)
 				mGame->SetState(Game::EQuit);
 			});
 		});
-	//new DialogBox(mGame, "Instructions", [this]() {});
-
 }
 
 StartMenu::~StartMenu()
