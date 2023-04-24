@@ -14,6 +14,9 @@ AiCar::AiCar(Game* game)
 {
 	mMeshComp = new MeshComponent(this);
 	mMeshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/aiCar.gpmesh"));
+
+	mOffset = game->GetOffset();
+
 	SetPosition(Vector3(0,0,0));
 	this->SetScale(0.5);
 
@@ -24,6 +27,7 @@ AiCar::AiCar(Game* game)
 	mMoveComp->SetForwardSpeed(2000);
 
 	mExplosion = game->GetRenderer()->GetMesh("Assets/Explosion.gpmesh");
+
 }
 
 void AiCar::AiCarMovement()

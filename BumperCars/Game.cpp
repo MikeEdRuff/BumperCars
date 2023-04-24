@@ -394,8 +394,7 @@ void Game::GenerateOutput()
 
 void Game::LoadData()
 {
-	const float offset = 2.0f;
-
+	float offset = GetOffset();
 	LoadText("Assets/English.gptext");		//Caleb Bellisle
 
 	// Loads obstacles into game			//Julian Powell

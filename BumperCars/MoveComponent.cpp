@@ -40,7 +40,7 @@ void MoveComponent::Update(float deltaTime)
 	}
 
 
-	const float offset = 2.0f;
+	const float offset = 2.3f;
 
 	float start = -1250.0f/offset;
 	float size = 500.0f/offset;

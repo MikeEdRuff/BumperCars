@@ -53,6 +53,7 @@ public:
 	void AddPoint() { mScore++; }
 
 	void AddSphere(SphereActor* sphere); // Jackson Wise
+	float GetOffset() { return 2.3f; };
 	
 private:
 	void ProcessInput();
@@ -100,4 +101,5 @@ private:
 	int numAiCars = 3; // Jackson Wise
 	SoundEvent mMusicEvent;
 	SoundEvent mReverbSnap;
+
 };

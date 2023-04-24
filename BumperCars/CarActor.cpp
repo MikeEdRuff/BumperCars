@@ -41,11 +41,12 @@ void CarActor::ActorInput(const uint8_t* keys)
 {
 	float forwardSpeed = 0.0f;
 	float angularSpeed = 0.0f;
+	float offset = GetGame()->GetOffset();
 
 	// Jackson Wise - Different speed settings
-	const float slowAccel = 1600.0f;
-	const float maxSpeed = 2140.0f;
-	const float maxBoost = 2650.0f;
+	const float slowAccel = 1600.0f/(offset-1);
+	const float maxSpeed = 2140.0f /(offset-1);
+	const float maxBoost = 2650.0f /(offset-1);
 
 	// wasd movement
 	if (keys[SDL_SCANCODE_W])
