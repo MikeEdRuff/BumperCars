@@ -28,4 +28,3 @@ protected:
 	float mRadarRange;
 	float mRadarRadius;
 };
-
