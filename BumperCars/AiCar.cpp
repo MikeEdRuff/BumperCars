@@ -9,8 +9,6 @@
 #include "MoveComponent.h"
 #include "CircleComponent.h"
 #include <math.h>
-#include "TargetComponent.h"
-
 AiCar::AiCar(Game* game)
 	:Actor(game)
 {
@@ -29,8 +27,6 @@ AiCar::AiCar(Game* game)
 	mMoveComp->SetForwardSpeed(2000);
 
 	mExplosion = game->GetRenderer()->GetMesh("Assets/Explosion.gpmesh");
-
-	new TargetComponent(this); //Will Briggs
 
 }
 
