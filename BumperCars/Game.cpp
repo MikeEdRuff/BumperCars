@@ -35,6 +35,7 @@
 #include "Speedometer.h"		//Caleb Bellisle
 #include "Scoreboard.h" // Jackson Wise
 #include "Timer.h"
+#include "Radar.h"
 using namespace std;
 #include <iostream>
 #include <fstream>
@@ -397,6 +398,8 @@ void Game::LoadData()
 	float offset = GetOffset();
 	LoadText("Assets/English.gptext");		//Caleb Bellisle
 
+	mRadar = new Radar(this);				//Julian Powell
+
 	// Loads obstacles into game			//Julian Powell
 	Actor* a = new Actor(this);		
 	Quaternion q(Vector3::UnitY, -Math::PiOver2);
@@ -515,6 +518,11 @@ void Game::LoadData()
 	mAiCarOne->AiSeedSet(0);
 	mAiCarTwo->AiSeedSet(1);
 	mAiCarThree->AiSeedSet(2);
+
+	//Add aiCars to vector for radar Julian Powell
+	mAiCarActors.push_back(mAiCarOne);
+	mAiCarActors.push_back(mAiCarTwo);
+	mAiCarActors.push_back(mAiCarThree);
 
 	//if(mGameState != EStart)
 	// create skybox

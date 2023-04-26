@@ -25,6 +25,7 @@ public:
 	virtual void OnUpdateWorldTransform() { }
 
 	int GetUpdateOrder() const { return mUpdateOrder; }
+	class Actor* GetOwner() { return mOwner; } //Will Briggs restored 2023-04-14
 protected:
 	// Owning actor
 	class Actor* mOwner;

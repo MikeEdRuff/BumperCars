@@ -31,6 +31,8 @@ public:
 	// Manage UI stack
 	const std::vector<class UIScreen*>& GetUIStack() { return mUIStack; }		//Caleb Bellisle
 	void PushUI(class UIScreen* screen);		//Caleb Bellisle
+	std::vector<class AiCar*>& GetAiCars() { return mAiCarActors; }	//Julian Powell
+	class Radar* GetRadar() { return mRadar; } //Will Briggs
 
 	enum GameState		//Caleb Bellisle
 	{
@@ -84,6 +86,8 @@ private:
 	// Game-specific code
 	class Speedometer* mSpeedometer;		//Caleb Bellisle
 
+	std::vector<class AiCar*> mAiCarActors;	//Julian Powell
+	class Radar* mRadar;	//Julian Powell
 	class SkyBox* mySkyBox; // Michael Ruff
 	class AiCar* mAiCarOne; // Michael Ruff
 	class AiCar* mAiCarTwo; // Micheal Ruff
