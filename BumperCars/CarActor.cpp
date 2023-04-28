@@ -147,7 +147,7 @@ void CarActor::UpdateActor(float deltaTime)
 		{
 			if (mForwardSpeed > 0)
 			{
-				mForwardSpeed = -1000;
+				mForwardSpeed = -1000; // carl 
 			}
 			else
 			{

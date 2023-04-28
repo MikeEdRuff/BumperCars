@@ -34,6 +34,7 @@
     <ClCompile Include="OrbitCamera.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="PlaneActor.cpp" />
+    <ClCompile Include="Radar.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -45,6 +46,7 @@
     <ClCompile Include="SplineCamera.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="StartMenu.cpp" />
+    <ClCompile Include="TargetComponent.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UIScreen.cpp" />
@@ -75,6 +77,7 @@
     <ClInclude Include="OrbitCamera.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="PlaneActor.h" />
+    <ClInclude Include="Radar.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scoreboard.h" />
     <ClInclude Include="Shader.h" />
@@ -86,6 +89,7 @@
     <ClInclude Include="SplineCamera.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="StartMenu.h" />
+    <ClInclude Include="TargetComponent.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UIScreen.h" />

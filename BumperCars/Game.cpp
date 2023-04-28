@@ -231,10 +231,10 @@ void Game::UpdateGame()
 		mScore++;
 		mGameState = EWin;
 
-		//ifstream file;
-		//file.open("leaderboard.txt");
+		ifstream file;
+		file.open("leaderboard.txt");
 
-		//fstream f;
+		fstream f;
 		ofstream fout;			// carl McAninch line 238 - 281
 		ifstream fin;
 		fin.open("leaderboard.txt");
