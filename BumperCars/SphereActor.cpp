@@ -16,7 +16,7 @@ SphereActor::SphereActor(Game* game, float x, float y, float z, float scale)
 	this->SetScale(scale);
 
 	mCircle = new CircleComponent(this);
-	mCircle->SetRadius(scale+1.0f);
+	mCircle->SetRadius(scale+3.0f);
 
 	mMeshComp = new MeshComponent(this);
 	mMeshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/Sphere.gpmesh"));

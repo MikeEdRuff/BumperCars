@@ -23,7 +23,7 @@ AiCar::AiCar(Game* game)
 	this->SetScale(0.5);
 
 	mCircle = new CircleComponent(this);	//carl Mcaninch
-	mCircle->SetRadius(100.0f);
+	mCircle->SetRadius(100.0f);		//Carl Mcaninch
 
 	mMoveComp = new MoveComponent(this);
 	mMoveComp->SetForwardSpeed(2000);

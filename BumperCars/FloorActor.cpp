@@ -6,7 +6,7 @@
 FloorActor::FloorActor(Game* game)
 	:Actor(game)
 {
-	SetScale(2.3f);
+	SetScale(2.3f); // Changed to scale - Carl
 	MeshComponent* mc = new MeshComponent(this);
 	mc->SetMesh(GetGame()->GetRenderer()->GetMesh("Assets/Plane.gpmesh"));
 }

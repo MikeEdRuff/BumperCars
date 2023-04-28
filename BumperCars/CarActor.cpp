@@ -34,7 +34,7 @@ CarActor::CarActor(Game* game)
 	mCameraComp = new FollowCamera(this);
 	mCameraComp->SnapToIdeal();
 	mCircle = new CircleComponent(this);
-	mCircle->SetRadius(100.0f);
+	mCircle->SetRadius(150.0f);
 }
 
 void CarActor::ActorInput(const uint8_t* keys)
@@ -147,7 +147,12 @@ void CarActor::UpdateActor(float deltaTime)
 		{
 			if (mForwardSpeed > 0)
 			{
-				mForwardSpeed = -1000; // carl 
+				if (mForwardSpeed > 1500) {		//Carl
+					mForwardSpeed = -1500;
+				}
+				else {
+					mForwardSpeed = -1000; // carl 
+				}
 			}
 			else
 			{
