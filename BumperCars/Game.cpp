@@ -39,7 +39,7 @@
 using namespace std;
 #include <iostream>
 #include <fstream>
-
+#include <map>
 Game::Game()
 :mRenderer(nullptr)
 ,mAudioSystem(nullptr)
@@ -235,24 +235,50 @@ void Game::UpdateGame()
 		//file.open("leaderboard.txt");
 
 		//fstream f;
-		ofstream fout;
+		ofstream fout;			// carl McAninch line 238 - 281
 		ifstream fin;
 		fin.open("leaderboard.txt");
 		fout.open("leaderboard.txt", ios::app);
 
 
-		if (fin.is_open()) 
+		if (fin.is_open())
 		{
-			fout << mTimer->GetTime() << endl;
+			fout << mName << " " << mTimer->GetTime() << endl;
 			fin.close();
 			fout.close();
 		}
-		else 
+		else
 		{
 			ofstream MyFile("leaderboard.txt");
-			MyFile << mTimer->GetTime() << endl;
+			MyFile << mName << " " << mTimer->GetTime() << endl;
 			MyFile.close();
 		}
+
+		ifstream inFile("leaderboard.txt");
+		std::string line;
+		std::map<int, std::string>myMap;
+		int num = 0;
+		while (getline(inFile, line))
+		{
+			stringstream ss(line);
+			std::string name;
+			std::string number;
+			ss >> name;
+			ss >> number;
+			num = std::stoi(number);
+			myMap.insert(std::pair<int, std::string>(num, name));
+		}
+		inFile.close();
+		ofstream newFile("tempFile.txt");
+		for (pair<int, std::string> entry : myMap) {
+			newFile << entry.second << " " << entry.first << endl;
+		}
+		newFile.close();
+
+		char oldname[] = "tempFile.txt";
+		char newName[] = "leaderboard.txt";
+		remove("leaderboard.txt");
+		rename("tempFile.txt", "leaderboard.txt");
 		
 	}
 
@@ -395,6 +421,7 @@ void Game::GenerateOutput()
 
 void Game::LoadData()
 {
+	cin >> mName; // Carl McAninch 
 	float offset = GetOffset();
 	LoadText("Assets/English.gptext");		//Caleb Bellisle
 

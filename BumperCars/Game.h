@@ -105,5 +105,5 @@ private:
 	int numAiCars = 3; // Jackson Wise
 	SoundEvent mMusicEvent;
 	SoundEvent mReverbSnap;
-
+	std::string mName;	//Carl McAninch
 };
