@@ -234,7 +234,6 @@ void Game::UpdateGame()
 		ifstream file;
 		file.open("leaderboard.txt");
 
-		fstream f;
 		ofstream fout;			// carl McAninch line 238 - 281
 		ifstream fin;
 		fin.open("leaderboard.txt");
@@ -269,17 +268,13 @@ void Game::UpdateGame()
 			myMap.insert(std::pair<int, std::string>(num, name));
 		}
 		inFile.close();
-		ofstream newFile("tempFile.txt");
+		ofstream newFile("orderedLeaderboard.txt");
 		for (pair<int, std::string> entry : myMap) {
 			newFile << entry.second << " " << entry.first << endl;
 		}
 		newFile.close();
 
-		char oldname[] = "tempFile.txt";
-		char newName[] = "leaderboard.txt";
-		remove("leaderboard.txt");
-		rename("tempFile.txt", "leaderboard.txt");
-		
+		//bool thing = std::rename("tempFile.txt", "leaderboard.txt");
 	}
 
 	//mMusicEvent = mAudioSystem->PlayEvent("event:/Idlesound");

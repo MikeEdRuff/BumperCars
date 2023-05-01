@@ -29,7 +29,7 @@ CarActor::CarActor(Game* game)
 	mMeshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/playerCar.gpmesh"));
 	SetPosition(Vector3(0.0f, 0.0f, -100.0f));
 	this->SetScale(0.5f); // Offsetting scale
-	
+
 	mMoveComp = new MoveComponent(this);
 	mCameraComp = new FollowCamera(this);
 	mCameraComp->SnapToIdeal();
@@ -40,13 +40,13 @@ CarActor::CarActor(Game* game)
 void CarActor::ActorInput(const uint8_t* keys)
 {
 	float forwardSpeed = 0.0f;
-	float angularSpeed = 0.0f;
+	mAngularSpeed = 0.0f;
 	float offset = GetGame()->GetOffset();
 
 	// Jackson Wise - Different speed settings
-	const float slowAccel = 1600.0f/(offset-1);
-	const float maxSpeed = 2140.0f /(offset-1);
-	const float maxBoost = 2650.0f /(offset-1);
+	const float slowAccel = 1600.0f / (offset - 1);
+	const float maxSpeed = 2140.0f / (offset - 1);
+	const float maxBoost = 2650.0f / (offset - 1);
 
 	// wasd movement
 	if (keys[SDL_SCANCODE_W])
@@ -81,11 +81,11 @@ void CarActor::ActorInput(const uint8_t* keys)
 	else if (keys[SDL_SCANCODE_S])
 	{
 		// Jackson Wise
-		if (mForwardSpeed > -maxSpeed/2)
+		if (mForwardSpeed > -maxSpeed / 2)
 			mForwardSpeed -= mAcceleration;
 	}
 	// Jackson Wise - Gradually slows down if nothing is being done
-	else 
+	else
 	{
 		if (mForwardSpeed > 0)
 			mForwardSpeed -= mAcceleration / 2;
@@ -95,30 +95,30 @@ void CarActor::ActorInput(const uint8_t* keys)
 
 	if (keys[SDL_SCANCODE_A] && mForwardSpeed != 0.0f)
 	{
-		angularSpeed -= Math::Pi;
+		mAngularSpeed -= Math::Pi;
 
 		// Jackson Wise - Drift Mechanics
 		if (keys[SDL_SCANCODE_LSHIFT])
 		{
-			angularSpeed *= 1.5;
+			mAngularSpeed *= 1.5;
 			mForwardSpeed -= mAcceleration;
 		}
 	}
 	if (keys[SDL_SCANCODE_D] && mForwardSpeed != 0.0f)
 	{
-		angularSpeed += Math::Pi;
+		mAngularSpeed += Math::Pi;
 
 		// Jackson Wise - Drift Mechanics
 		if (keys[SDL_SCANCODE_LSHIFT])
 		{
-			angularSpeed *= 1.5;
+			mAngularSpeed *= 1.5;
 			mForwardSpeed -= mAcceleration;
 		}
-	} 
+	}
 
 
 	mMoveComp->SetForwardSpeed(mForwardSpeed);
-	mMoveComp->SetAngularSpeed(angularSpeed);
+	mMoveComp->SetAngularSpeed(mAngularSpeed);
 
 	// Adjust horizontal distance of camera based on speed
 	if (!Math::NearZero(forwardSpeed))
@@ -130,16 +130,16 @@ void CarActor::ActorInput(const uint8_t* keys)
 		mCameraComp->SetHorzDist(350.0f);
 	}
 
-	
+
 }
 
 void CarActor::UpdateActor(float deltaTime)
 {
 	// Jackson Wise - Updating boost duration and boost cooldown as time progresses
 	if (mBoostDuration <= 6.0f)
-		mBoostDuration += deltaTime; 
+		mBoostDuration += deltaTime;
 	mBoostCooldown -= deltaTime;
-	
+
 	// Jackson Wise - Collisions with the obstacles
 	for (auto sphere : GetGame()->GetSpheres())
 	{
@@ -156,8 +156,10 @@ void CarActor::UpdateActor(float deltaTime)
 			}
 			else
 			{
-				mForwardSpeed = 1000;
+				mForwardSpeed = 800;
 			}
+
+			// now move *this in its new direction 1 second's worth OR 10 poistion worth OR ...'
 		}
 	}
 
