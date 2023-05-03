@@ -40,6 +40,8 @@ using namespace std;
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <random>
+
 Game::Game()
 :mRenderer(nullptr)
 ,mAudioSystem(nullptr)
@@ -537,9 +539,24 @@ void Game::LoadData()
 	mAiCarOne = new AiCar(this);
 	mAiCarTwo = new AiCar(this);
 	mAiCarThree = new AiCar(this);
-	mAiCarOne->AiSeedSet(0);
-	mAiCarTwo->AiSeedSet(1);
-	mAiCarThree->AiSeedSet(2);
+
+	//randomly set the seed of the ai cars Michael Ruff
+	int seedOne = rand() % 5 + 1;
+	int seedTwo = rand() % 5 + 1;
+	int seedThree = rand() % 5 + 1;
+
+	while(seedTwo == seedOne)
+	{
+		seedTwo = rand() % 5 + 1;
+	}
+	while (seedThree == seedOne || seedThree == seedTwo)
+	{
+		seedThree = rand() % 5 + 1;
+	}
+	
+	mAiCarOne->AiSeedSet(seedOne);
+	mAiCarTwo->AiSeedSet(seedTwo);
+	mAiCarThree->AiSeedSet(seedThree);
 
 	//Add aiCars to vector for radar Julian Powell
 	mAiCarActors.push_back(mAiCarOne);

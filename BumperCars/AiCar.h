@@ -29,14 +29,18 @@ private:
 
 	// seed decides spawn location and movement of the car
 	int seed;
-	Vector3 spawn[3] = { Vector3(1000.0f, 1000.0f, -100.0f), Vector3(10000,2000,-100), Vector3(4000,9000,-100) };
-	float targetX[3][10] = { {1000/mOffset,2000 / mOffset,8000 / mOffset,7000 / mOffset,4500 / mOffset,4000 / mOffset,3000 / mOffset,2000 / mOffset,2000 / mOffset,1000 / mOffset},
-						   {5000 / mOffset,4000 / mOffset,6000 / mOffset,5000 / mOffset,9000 / mOffset,3000 / mOffset,8000 / mOffset,9000 / mOffset,4000 / mOffset,10000 / mOffset},
-						   {500 / mOffset,1000 / mOffset,2000 / mOffset,2500 / mOffset,1000 / mOffset,2000 / mOffset,1000 / mOffset,1000 / mOffset,1000 / mOffset,4000 / mOffset} };
+	Vector3 spawn[5] = { Vector3(1000.0f, 1000.0f, -100.0f), Vector3(10000,2000,-100), Vector3(4000,9000,-100), Vector3(4000,9000,-100), Vector3(4000,9000,-100) };
+	float targetX[5][10] = { {1000/mOffset,2000 / mOffset,8000 / mOffset,7000 / mOffset,4500 / mOffset,4000 / mOffset,3000 / mOffset,2000 / mOffset,2000 / mOffset,1000 / mOffset},
+							{5000 / mOffset,4000 / mOffset,6000 / mOffset,5000 / mOffset,9000 / mOffset,3000 / mOffset,8000 / mOffset,9000 / mOffset,4000 / mOffset,10000 / mOffset},
+							{500 / mOffset,1000 / mOffset,2000 / mOffset,2500 / mOffset,1000 / mOffset,2000 / mOffset,1000 / mOffset,1000 / mOffset,1000 / mOffset,4000 / mOffset},
+							{500 / mOffset,1000 / mOffset,2000 / mOffset,2500 / mOffset,1000 / mOffset,2000 / mOffset,1000 / mOffset,1000 / mOffset,1000 / mOffset,4000 / mOffset} ,
+							{500 / mOffset,1000 / mOffset,2000 / mOffset,2500 / mOffset,1000 / mOffset,2000 / mOffset,1000 / mOffset,1000 / mOffset,1000 / mOffset,4000 / mOffset} };
 
-	float targetY[3][10] = { {8000 / mOffset,10000 / mOffset,9000 / mOffset,2000 / mOffset,2000 / mOffset,1000 / mOffset,1500 / mOffset,2000 / mOffset,500 / mOffset,1000 / mOffset},
-						   {8000 / mOffset,5000 / mOffset,4000 / mOffset,1000 / mOffset,500 / mOffset,8000 / mOffset,9000 / mOffset,7500 / mOffset,5000 / mOffset,2000 / mOffset},
-						   {8000 / mOffset,1000 / mOffset,500 / mOffset,2000 / mOffset,500 / mOffset,1000 / mOffset,1000 / mOffset,1000 / mOffset,1000 / mOffset,9000 / mOffset} };
+	float targetY[5][10] = { {8000 / mOffset,10000 / mOffset,9000 / mOffset,2000 / mOffset,2000 / mOffset,1000 / mOffset,1500 / mOffset,2000 / mOffset,500 / mOffset,1000 / mOffset},
+							{8000 / mOffset,5000 / mOffset,4000 / mOffset,1000 / mOffset,500 / mOffset,8000 / mOffset,9000 / mOffset,7500 / mOffset,5000 / mOffset,2000 / mOffset},
+							{8000 / mOffset,1000 / mOffset,500 / mOffset,2000 / mOffset,500 / mOffset,1000 / mOffset,1000 / mOffset,1000 / mOffset,1000 / mOffset,9000 / mOffset},
+							{8000 / mOffset,1000 / mOffset,500 / mOffset,2000 / mOffset,500 / mOffset,1000 / mOffset,1000 / mOffset,1000 / mOffset,1000 / mOffset,9000 / mOffset},
+							{8000 / mOffset,1000 / mOffset,500 / mOffset,2000 / mOffset,500 / mOffset,1000 / mOffset,1000 / mOffset,1000 / mOffset,1000 / mOffset,9000 / mOffset} };
 
 	Vector3 UnitZ = Vector3(0.0f, 0.0f, 1.0f);
 
