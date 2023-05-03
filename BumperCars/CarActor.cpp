@@ -28,7 +28,7 @@ CarActor::CarActor(Game* game)
 	mMeshComp = new MeshComponent(this);
 	mMeshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/playerCar.gpmesh"));
 	SetPosition(Vector3(0.0f, 0.0f, -100.0f));
-	this->SetScale(0.5f); // Offsetting scale
+	this->SetScale(0.5f); // Jackson Wise - Offsetting scale
 
 	mMoveComp = new MoveComponent(this);
 	mCameraComp = new FollowCamera(this);
@@ -41,7 +41,7 @@ void CarActor::ActorInput(const uint8_t* keys)
 {
 	float forwardSpeed = 0.0f;
 	mAngularSpeed = 0.0f;
-	float offset = GetGame()->GetOffset();
+	float offset = GetGame()->GetOffset(); // Jackson Wise
 
 	// Jackson Wise - Different speed settings
 	const float slowAccel = 1600.0f / (offset - 1);

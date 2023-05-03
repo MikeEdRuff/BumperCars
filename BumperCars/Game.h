@@ -55,7 +55,7 @@ public:
 	void AddPoint() { mScore++; }
 
 	void AddSphere(SphereActor* sphere); // Jackson Wise
-	float GetOffset() { return 2.3f; };
+	float GetOffset() { return 2.3f; }; // Jackson Wise
 	
 private:
 	void ProcessInput();

@@ -1,3 +1,8 @@
+/////////////////////////////
+// Class created by Jackson Wise, Spring 2023
+// Created to add a timer to the players user interface
+/////////////////////////////
+
 #include "Scoreboard.h"
 #include "Game.h"
 #include "DialogBox.h"

@@ -419,7 +419,7 @@ void Game::GenerateOutput()
 void Game::LoadData()
 {
 	cin >> mName; // Carl McAninch 
-	float offset = GetOffset();
+	float offset = GetOffset(); // Jackson Wise
 	LoadText("Assets/English.gptext");		//Caleb Bellisle
 
 	mRadar = new Radar(this);				//Julian Powell

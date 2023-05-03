@@ -22,7 +22,7 @@ private:
 	class FollowCamera* mCameraComp;
 	class MeshComponent* mMeshComp;
 	const float mAcceleration = 20.0f;
-	float mOffset = 2.3;
+	float mOffset = 2.3f; // Jackson Wise
 	float mForwardSpeed;
 	float mDeathTimer = 0.5f;
 	class Mesh* mExplosion;
