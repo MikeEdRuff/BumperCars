@@ -52,7 +52,19 @@ void AiCar::AiCarMovement()
 	}
 	float angle = Math::Atan2(targetYtemp - currentY, targetXtemp - currentX);
 	Quaternion q(UnitZ, angle);
-	SetRotation(q);
+	float currentAngle = GetRotation().w;
+	if (q.w > currentAngle - 0.1 && q.w < currentAngle + 0.1)
+	{
+		SetRotation(q);
+	}
+	else if (q.w > currentAngle)
+	{
+		mMoveComp->SetAngularSpeed(10);
+	}
+	else
+	{
+		mMoveComp->SetAngularSpeed(-10);
+	}
 	
 }
 
@@ -89,7 +101,7 @@ void AiCar::Update(float deltaTime) //Carl McAninch
 // Sets the seed and spawn location of the car
 void AiCar::AiSeedSet(int setSeed)
 {
-	seed = setSeed;
+	seed = setSeed - 1;
 	SetPosition(spawn[seed]);
 }
 
