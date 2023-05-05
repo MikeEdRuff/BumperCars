@@ -59,11 +59,11 @@ void AiCar::AiCarMovement()
 	}
 	else if (q.w > currentAngle)
 	{
-		mMoveComp->SetAngularSpeed(10);
+		mMoveComp->SetAngularSpeed(6);
 	}
 	else
 	{
-		mMoveComp->SetAngularSpeed(-10);
+		mMoveComp->SetAngularSpeed(-6);
 	}
 	
 }

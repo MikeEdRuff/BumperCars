@@ -216,8 +216,8 @@ void Game::UpdateGame()
 {
 	// Michael Ruff Make Car Move
 	mAiCarOne->AiCarMovement();
-	//mAiCarTwo->AiCarMovement();
-	//mAiCarThree->AiCarMovement();
+	mAiCarTwo->AiCarMovement();
+	mAiCarThree->AiCarMovement();
 
 	//mMusicEvent = mAudioSystem->PlayEvent("event:/MenuMusic");
 
@@ -316,8 +316,8 @@ void Game::UpdateGame()
 	float deltaTime = (SDL_GetTicks() - mTicksCount) / 1000.0f;
 
 	mAiCarOne->Update(deltaTime);//Carl McAninch
-	//mAiCarTwo->Update(deltaTime);
-	//mAiCarThree->Update(deltaTime);
+	mAiCarTwo->Update(deltaTime);
+	mAiCarThree->Update(deltaTime);
 
 	if (deltaTime > 0.05f)
 	{
@@ -537,11 +537,13 @@ void Game::LoadData()
 
 	// create aicar Michael Ruff
 	mAiCarOne = new AiCar(this);
-	//mAiCarTwo = new AiCar(this);
-	//mAiCarThree = new AiCar(this);
+	mAiCarTwo = new AiCar(this);
+	mAiCarThree = new AiCar(this);
 
 	//randomly set the seed of the ai cars Michael Ruff
-	int seedOne = 5;
+	int seedOne = 1;
+	int seedTwo = 2; 
+	int seedThree = 3;
 	/*int seedOne = rand() % 5 + 1;
 	int seedTwo = rand() % 5 + 1;
 	int seedThree = rand() % 5 + 1;
@@ -556,13 +558,13 @@ void Game::LoadData()
 	}
 	*/
 	mAiCarOne->AiSeedSet(seedOne);
-	//mAiCarTwo->AiSeedSet(seedTwo);
-	//mAiCarThree->AiSeedSet(seedThree);
+	mAiCarTwo->AiSeedSet(seedTwo);
+	mAiCarThree->AiSeedSet(seedThree);
 
 	//Add aiCars to vector for radar Julian Powell
 	mAiCarActors.push_back(mAiCarOne);
-	//mAiCarActors.push_back(mAiCarTwo);
-	//mAiCarActors.push_back(mAiCarThree);
+	mAiCarActors.push_back(mAiCarTwo);
+	mAiCarActors.push_back(mAiCarThree);
 
 	//if(mGameState != EStart)
 	// create skybox
