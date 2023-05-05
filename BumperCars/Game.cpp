@@ -231,10 +231,10 @@ void Game::UpdateGame()
 		mScore++;
 		mGameState = EWin;
 
-		ifstream file;
+		ifstream file;	// carl McAninch line 236 - 270
 		file.open("leaderboard.txt");
 
-		ofstream fout;			// carl McAninch line 238 - 281
+		ofstream fout;			
 		ifstream fin;
 		fin.open("leaderboard.txt");
 		fout.open("leaderboard.txt", ios::app);
@@ -416,7 +416,8 @@ void Game::GenerateOutput()
 
 void Game::LoadData()
 {
-	cin >> mName; // Carl McAninch 
+	cout << "Enter your name: "; // Carl McAninch
+	cin >> mName;  
 	float offset = GetOffset(); // Jackson Wise
 	LoadText("Assets/English.gptext");		//Caleb Bellisle
 
