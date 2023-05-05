@@ -21,6 +21,7 @@ public:
 	bool Initialize();
 	void RunLoop();
 	void Shutdown();
+	void RestartGame();
 
 	void AddActor(class Actor* actor);
 	void RemoveActor(class Actor* actor);

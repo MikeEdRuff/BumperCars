@@ -18,18 +18,19 @@ WinMenu::WinMenu(Game* game)
 	AudioSystem* mAudio = mGame->GetAudioSystem();
 	mAudio->PlayEvent("event:/MenuMusic");
 	AddButton("RestartButton", [this]() {
+		/*
 		mGame->SetState(Game::EGameplay);
 		mGame->Shutdown();
 		Game newGame;
 		newGame.Initialize();
 		newGame.RunLoop();//Caleb bellisle restarts the game by creating a new instance of the game;
 		//Close();
+		*/
 		});
 	AddButton("QuitButton", [this]() {
 		new DialogBox(mGame, "QuitText",
 		[this]() {
 				mGame->SetState(Game::EQuit);
-				mGame->Shutdown();
 			});
 		});
 	
@@ -50,3 +51,18 @@ void WinMenu::HandleKeyPress(int key)
 		Close();
 	}
 }
+
+/*
+void WriteToTexture(Texture*& thing, const std::string& text, Font* font,
+	const Vector3& color, int pointSize)
+{
+	// Clear out previous title texture if it exists
+	if (thing)
+	{
+		thing->Unload();
+		delete thing;
+		thing = nullptr;
+	}
+	thing = font->RenderUnmappedText(text, color, pointSize);
+}
+*/

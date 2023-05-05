@@ -98,7 +98,6 @@ void Game::RunLoop()
 	new StartMenu(this);		//Caleb Bellisle
 	while (mGameState != EQuit)
 	{
-
 		ProcessInput();
 		UpdateGame();
 		GenerateOutput();
@@ -109,7 +108,6 @@ void Game::RunLoop()
 		}
 	}
 	new WinMenu(this);
-
 }
 
 void Game::ProcessInput()
@@ -628,6 +626,35 @@ void Game::Shutdown()
 		mAudioSystem->Shutdown();
 	}
 	SDL_Quit();
+}
+
+void Game::RestartGame()
+{
+	mCarActor->SetPosition(Vector3(0.0f, 0.0f, -100.0f)); 
+
+	int seedOne = rand() % 5 + 1;
+	int seedTwo = rand() % 5 + 1;
+	int seedThree = rand() % 5 + 1;
+
+	while (seedTwo == seedOne)
+	{
+		seedTwo = rand() % 5 + 1;
+	}
+	while (seedThree == seedOne || seedThree == seedTwo)
+	{
+		seedThree = rand() % 5 + 1;
+	}
+
+	mAiCarOne->AiSeedSet(seedOne);
+	mAiCarTwo->AiSeedSet(seedTwo);
+	mAiCarThree->AiSeedSet(seedThree);
+
+	mAiCarOne->SetVisible(true);
+	mAiCarTwo->SetVisible(true);
+	mAiCarThree->SetVisible(true);
+
+	mScore = 0;
+	mTimer = 0;
 }
 
 void Game::AddActor(Actor* actor)
