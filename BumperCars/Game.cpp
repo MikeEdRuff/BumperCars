@@ -41,6 +41,7 @@ using namespace std;
 #include <fstream>
 #include <map>
 #include <random>
+#include <time.h>
 
 Game::Game()
 :mRenderer(nullptr)
@@ -539,22 +540,20 @@ void Game::LoadData()
 	mAiCarThree = new AiCar(this);
 
 	//randomly set the seed of the ai cars Michael Ruff
-	int seedOne = 1;
-	int seedTwo = 2; 
-	int seedThree = 3;
-	/*int seedOne = rand() % 5 + 1;
-	int seedTwo = rand() % 5 + 1;
-	int seedThree = rand() % 5 + 1;
+	srand(time(NULL));
+	int seedOne = rand() % 5;
+	int seedTwo = rand() % 5;
+	int seedThree = rand() % 5;
 
 	while(seedTwo == seedOne)
 	{
-		seedTwo = rand() % 5 + 1;
+		seedTwo = rand() % 5;
 	}
 	while (seedThree == seedOne || seedThree == seedTwo)
 	{
-		seedThree = rand() % 5 + 1;
+		seedThree = rand() % 5;
 	}
-	*/
+	
 	mAiCarOne->AiSeedSet(seedOne);
 	mAiCarTwo->AiSeedSet(seedTwo);
 	mAiCarThree->AiSeedSet(seedThree);
@@ -632,17 +631,17 @@ void Game::RestartGame()
 {
 	mCarActor->SetPosition(Vector3(0.0f, 0.0f, -100.0f)); 
 
-	int seedOne = rand() % 5 + 1;
-	int seedTwo = rand() % 5 + 1;
-	int seedThree = rand() % 5 + 1;
+	int seedOne = rand() % 5;
+	int seedTwo = rand() % 5;
+	int seedThree = rand() % 5;
 
 	while (seedTwo == seedOne)
 	{
-		seedTwo = rand() % 5 + 1;
+		seedTwo = rand() % 5;
 	}
 	while (seedThree == seedOne || seedThree == seedTwo)
 	{
-		seedThree = rand() % 5 + 1;
+		seedThree = rand() % 5;
 	}
 
 	mAiCarOne->AiSeedSet(seedOne);

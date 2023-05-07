@@ -26,7 +26,7 @@ AiCar::AiCar(Game* game)
 	mCircle->SetRadius(100.0f);		//Carl Mcaninch
 
 	mMoveComp = new MoveComponent(this);
-	mMoveComp->SetForwardSpeed(2000);
+	mMoveComp->SetForwardSpeed(1500);
 
 	mExplosion = game->GetRenderer()->GetMesh("Assets/Explosion.gpmesh");
 
@@ -43,7 +43,7 @@ void AiCar::AiCarMovement()
 
 	if (currentY > targetYtemp - 100 && currentY <  targetYtemp + 100 && currentX > targetXtemp - 100 && currentX < targetXtemp + 100)
 	{
-		if (currentTarget == 9)
+		if (currentTarget == 3)
 			currentTarget = 0;
 		else
 			currentTarget++;
@@ -101,7 +101,7 @@ void AiCar::Update(float deltaTime) //Carl McAninch
 // Sets the seed and spawn location of the car
 void AiCar::AiSeedSet(int setSeed)
 {
-	seed = setSeed - 1;
+	seed = setSeed;
 	SetPosition(spawn[seed]);
 }
 
